@@ -1,2 +1,2 @@
-# pymar2024
+Alexey Kozhan
 Python test automation course
