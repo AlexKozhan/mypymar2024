@@ -1,11 +1,7 @@
-"""Выводим на экран Hello world"""
+"""Dockstring1."""
+
 
 def main():
-    """Тело функции main"""
+    """Dockstring2."""
 
     print("Hello world!")
-
-if __name__ == "__main__":
-    """Функция-исполнитель"""
-
-    main()
