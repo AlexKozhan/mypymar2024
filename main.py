@@ -1,9 +1,15 @@
-"""Dockstring"""
+"""Dockstring123"""
+
+
 def main():
-    """Dockstring"""
+    """Dockstring456"""
+
+
     print("Hello world!")
 
 
 if __name__ == "__main__":
     """Dockstrinп"""
+
+
     main()
