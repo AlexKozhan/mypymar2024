@@ -1,26 +1,34 @@
-"""Заменить символ “#” на символ “/” в строке 'www.my_site.com#about'"""
-a = "www.my_site.com#about"
-print(a.replace("#", "/"))
+# Перевести строку в список "Robin Singh" => ["Robin”, “Singh"]
+a = "Robin Singh"
+print(list(a.split(" ")))
 
-"""Напишите программу, которая добавляет ‘ing’ к словам"""
-b = input("Введите слово: ")
-if len(b)<2:
-    print("Это точно слово? Попробуйте еще раз.")
-    b = input("Введите слово: ")
-result = b if b[-3:] == 'ing' else b + 'ing'
-print("Результат:", result)
 
-"""В строке “Ivanou Ivan” поменяйте местами слова => "Ivan Ivanou"""
-c = "Ivanou Ivan"
-d = c.split()
-new_c = d[1] + " " + d[0]
-print(new_c)
+# "I love arrays they are my favorite" =>
+# ["I", "love", "arrays", "they", "are", "my", "favorite"]
+b = "I love arrays they are my favorite"
+print(list(b.split(" ")))
 
-"""Напишите программу которая удаляет пробел в начале, в конце строки"""
-e = input("Введите строку с пробелом в начале и в конце: ")
-print(e.strip())
 
-"""Имена собственные всегда начинаются с заглавной буквы, за которой следуют строчные буквы. Исправьте данное имя собственное так, чтобы оно соответствовало этому утверждению. "pARiS" >> "Paris"""
-f = "pARiS"
-new_f = f.capitalize()
-print(new_f)
+# Дан список: [Ivan, Ivanou], и 2 строки: Minsk, Belarus
+# Напечатайте текст: “Привет, Ivan Ivanou! Добро пожаловать в Minsk Belarus”
+c = ["Ivan", "Ivanov"]
+d = "Minsk"
+e = "Belarus"
+print(f"Привет, {" ".join(c)}! Добро пожаловать в {d} {e}")
+
+
+# Дан список ["I", "love", "arrays", "they", "are", "my", "favorite"]
+# сделайте из него строку => "I love arrays they are my favorite"
+f = ["I", "love", "arrays", "they", "are", "my", "favorite"]
+print(" ".join(f))
+
+
+# Создайте список из 10 элементов, вставьте на 3-ю позицию новое значение,
+# удалите элемент из списка под индексом 6
+u = [
+    "I", "love", "arrays", "they", "are",
+    "my", "favorite", "python", "learning", "instrument"
+    ]
+u[2] = "tuples"
+del u[6]
+print(u)
