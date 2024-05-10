@@ -14,7 +14,8 @@ print(list(b.split(" ")))
 c = ["Ivan", "Ivanov"]
 d = "Minsk"
 e = "Belarus"
-print(f"Привет, {" ".join(c)}! Добро пожаловать в {d} {e}")
+print(f"Привет, {" ".join(c)}! "
+      f"Добро пожаловать в {d} {e}")
 
 
 # Дан список ["I", "love", "arrays", "they", "are", "my", "favorite"]
