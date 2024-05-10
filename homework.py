@@ -1,15 +1,15 @@
-"""Докстрингс"""
+"""Homework6"""
 
 
 # Перевести строку в список "Robin Singh" => ["Robin”, “Singh"]
 FIRST_LINE = "Robin Singh"
-print(list(FIRST_LINE.split(" ")))
+print(list(FIRST_LINE.split()))
 
 
 # "I love arrays they are my favorite" =>
 # ["I", "love", "arrays", "they", "are", "my", "favorite"]
 SECOND_LINE = "I love arrays they are my favorite"
-print(list(SECOND_LINE.split(" ")))
+print(list(SECOND_LINE.split()))
 
 
 # Дан список: [Ivan, Ivanou], и 2 строки: Minsk, Belarus
