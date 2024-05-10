@@ -1,35 +1,38 @@
+"""Докстрингс"""
+
+
 # Перевести строку в список "Robin Singh" => ["Robin”, “Singh"]
-a = "Robin Singh"
-print(list(a.split(" ")))
+FIRST_LINE = "Robin Singh"
+print(list(FIRST_LINE.split(" ")))
 
 
 # "I love arrays they are my favorite" =>
 # ["I", "love", "arrays", "they", "are", "my", "favorite"]
-b = "I love arrays they are my favorite"
-print(list(b.split(" ")))
+SECOND_LINE = "I love arrays they are my favorite"
+print(list(SECOND_LINE.split(" ")))
 
 
 # Дан список: [Ivan, Ivanou], и 2 строки: Minsk, Belarus
 # Напечатайте текст: “Привет, Ivan Ivanou! Добро пожаловать в Minsk Belarus”
-c = ["Ivan", "Ivanov"]
-d = "Minsk"
-e = "Belarus"
-print(f"Привет, {' '.join(c)}! "
-      f"Добро пожаловать в {d} {e}")
+THIRD_LINE = ["Ivan", "Ivanov"]
+CITY_LINE = "Minsk"
+STRANA_LINE = "Belarus"
+print(f"Привет, {' '.join(THIRD_LINE)}! "
+      f"Добро пожаловать в {CITY_LINE} {STRANA_LINE}")
 
 
 # Дан список ["I", "love", "arrays", "they", "are", "my", "favorite"]
 # сделайте из него строку => "I love arrays they are my favorite"
-f = ["I", "love", "arrays", "they", "are", "my", "favorite"]
-print(" ".join(f))
+NEW_SPISOK = ["I", "love", "arrays", "they", "are", "my", "favorite"]
+print(" ".join(NEW_SPISOK))
 
 
 # Создайте список из 10 элементов, вставьте на 3-ю позицию новое значение,
 # удалите элемент из списка под индексом 6
-u = [
+OLD_SPISOK = [
     "I", "love", "arrays", "they", "are",
     "my", "favorite", "python", "learning", "instrument"
     ]
-u[2] = "tuples"
-del u[6]
-print(u)
+OLD_SPISOK[2] = "tuples"
+del OLD_SPISOK[6]
+print(OLD_SPISOK)
