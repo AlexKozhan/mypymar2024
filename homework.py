@@ -37,7 +37,7 @@ OLD_SPISOK = [
     "I", "love", "arrays", "they", "are",
     "my", "favorite", "python", "learning", "instrument"
     ]
+"""changing 3td element of list, deleting 6th element"""
 OLD_SPISOK[2] = "tuples"
 del OLD_SPISOK[6]
-"""changed 3td element, deleted 6th element"""
 print(OLD_SPISOK)
