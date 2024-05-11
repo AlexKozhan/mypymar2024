@@ -39,5 +39,5 @@ OLD_SPISOK = [
     ]
 OLD_SPISOK[2] = "tuples"
 del OLD_SPISOK[6]
-"""printing the changed final list"""
+"""printing list with another 3rd element and deleted 6th"""
 print(OLD_SPISOK)
