@@ -1,3 +1,4 @@
+import random
 """В классическом варианте игра рассчитана
 на двух игроков. Каждый из игроков задумывает
 и записывает тайное 4-значное число с
@@ -21,10 +22,9 @@
 # 3219
 # Вы выиграли!
 
-"""Generated list of 4 random unique numbers"""
-import random
 Chislo_PK_List = random.sample('0123456789', 4)
-"""Changing type list to type string"""
+"""Generated list of 4 random unique numbers
+and changing type list to type string"""
 CHISLO_PK = ''.join(Chislo_PK_List)
 print("Загадано")
 
@@ -46,7 +46,7 @@ while True:
             KOLVO_KOROVI += 1
     print(F"{KOLVO_KOROVI} коров(ы), {KOLVO_BYKI} бык(а)")
 
-    """When we guessed right game stops"""
     if KOLVO_BYKI == 4:
         print('Вы выиграли!')
+        """When we guessed right game stops"""
         break
