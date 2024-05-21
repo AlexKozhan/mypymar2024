@@ -21,12 +21,12 @@
 # 3219
 # Вы выиграли!
 
+"""Generated list of 4 random unique numbers"""
 import random
-"""Generating list of 4 unique numbers for PK"""
 Chislo_PK_List = random.sample('0123456789', 4)
 """Changing type list to type string"""
-Chislo_PK = ''.join(Chislo_PK_List)
-print("Загадано", Chislo_PK)
+CHISLO_PK = ''.join(Chislo_PK_List)
+print("Загадано")
 
 while True:
     Chislo_Igroka = input("Введи 4-значное число с неповторяющимися цифрами ")
@@ -36,17 +36,17 @@ while True:
         print('Вы ввели некорректное число, попробуйте еще раз')
         continue
 
-    Byki = 0
-    Korovi = 0
-    """Cheking how many Byki and Korovi we guessed right"""
+    KOLVO_BYKI = 0
+    KOLVO_KOROVI = 0
+    """Cheking how many  KOLVO_BYKI and KOLVO_KOROVI we guessed right"""
     for i in range(4):
-        if Chislo_Igroka[i] == Chislo_PK[i]:
-            Byki += 1
-        elif Chislo_Igroka[i] in Chislo_PK:
-            Korovi += 1
-    print(F"{Korovi} коров(ы), {Byki} бык(а)")
+        if Chislo_Igroka[i] == CHISLO_PK[i]:
+            KOLVO_BYKI += 1
+        elif Chislo_Igroka[i] in CHISLO_PK:
+            KOLVO_KOROVI += 1
+    print(F"{KOLVO_KOROVI} коров(ы), {KOLVO_BYKI} бык(а)")
 
-    if Byki == 4:
-        """Finishin the game"""
+    """When we guessed right game stops"""
+    if KOLVO_BYKI == 4:
         print('Вы выиграли!')
         break
