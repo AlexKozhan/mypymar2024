@@ -29,23 +29,23 @@ CHISLO_PK = ''.join(Chislo_PK_List)
 print("Загадано")
 
 while True:
-    Chislo_Igroka = input("Введи 4-значное число с неповторяющимися цифрами ")
+    chislo_igroka = input("Введи 4-значное число с неповторяющимися цифрами ")
     """Checking input number to have 4 unique digits"""
-    if (len(Chislo_Igroka) != 4 or not Chislo_Igroka.isdigit()
-            or len(set(Chislo_Igroka)) != 4):
+    if (len(chislo_igroka) != 4 or not chislo_igroka.isdigit()
+            or len(set(chislo_igroka)) != 4):
         print('Вы ввели некорректное число, попробуйте еще раз')
         continue
 
-    KOLVO_BYKI = 0
+    kolvo_byki = 0
     KOLVO_KOROVI = 0
-    """Cheking how many  KOLVO_BYKI and KOLVO_KOROVI we guessed right"""
+    """Cheking how many  kolvo_byki and KOLVO_KOROVI we guessed right"""
     for i in range(4):
-        if Chislo_Igroka[i] == CHISLO_PK[i]:
-            KOLVO_BYKI += 1
-        elif Chislo_Igroka[i] in CHISLO_PK:
+        if chislo_igroka[i] == CHISLO_PK[i]:
+            kolvo_byki += 1
+        elif chislo_igroka[i] in CHISLO_PK:
             KOLVO_KOROVI += 1
-    print(F"{KOLVO_KOROVI} коров(ы), {KOLVO_BYKI} бык(а)")
+    print(F"{KOLVO_KOROVI} коров(ы), {kolvo_byki} бык(а)")
 
-    if KOLVO_BYKI == 4:
+    if kolvo_byki == 4:
         print('Вы выиграли!')
         break
