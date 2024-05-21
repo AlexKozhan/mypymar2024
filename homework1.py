@@ -36,16 +36,16 @@ while True:
         print('Вы ввели некорректное число, попробуйте еще раз')
         continue
 
-    kolvo_byki = 0
+    KOLVO_BYKI = 0
     KOLVO_KOROVI = 0
-    """Cheking how many  kolvo_byki and KOLVO_KOROVI we guessed right"""
+    """Cheking how many  KOLVO_BYKI and KOLVO_KOROVI we guessed right"""
     for i in range(4):
         if chislo_igroka[i] == CHISLO_PK[i]:
-            kolvo_byki += 1
+            KOLVO_BYKI += 1
         elif chislo_igroka[i] in CHISLO_PK:
             KOLVO_KOROVI += 1
-    print(F"{KOLVO_KOROVI} коров(ы), {kolvo_byki} бык(а)")
+    print(F"{KOLVO_KOROVI} коров(ы), {KOLVO_BYKI} бык(а)")
 
-    if kolvo_byki == 4:
+    if KOLVO_BYKI == 4:
         print('Вы выиграли!')
         break
