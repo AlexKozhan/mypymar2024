@@ -18,6 +18,6 @@ Missing_Statui = []
 for i in range(Min_Statuya, Max_Statuya + 1):
     if i not in Statui_List:
         Missing_Statui.append(i)
+print(f"Не хватает {len(Missing_Statui)} статуй")
 MISSING_STATUI_STRING = ', '.join(map(str, Missing_Statui))
-print(f"Не хватает {len(MISSING_STATUI_STRING)} статуй")
 print(f"У вас отсутсвуют статуи размеров {MISSING_STATUI_STRING}")

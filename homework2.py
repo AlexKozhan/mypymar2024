@@ -25,6 +25,6 @@ N = 10
 """creating stars and white spaces for piramida"""
 for i in range(N):
     stars = 2*i+1
-    probeli = N-i-1
-    piramida = ' ' * probeli + '*' * stars
+    spaces = N-i-1
+    piramida = ' ' * spaces + '*' * stars
     print(piramida)
