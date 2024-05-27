@@ -16,6 +16,6 @@ def searching_number(n, first_number):
     return final_number
 
 
-Max_Number1 = 10
-First_Number1 = 3
-print('(n, first_number) = ', searching_number(Max_Number1, First_Number1))
+MAX_NUMBER = 10
+FIRST_NUMBER1 = 3
+print('(n, first_number) = ', searching_number(MAX_NUMBER, FIRST_NUMBER1))
