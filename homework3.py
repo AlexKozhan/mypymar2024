@@ -18,7 +18,6 @@ def validator(card_number):
     reversed_list = [int(d) for d in card_number][::-1]
     temp_sum = 0
     for i, digit in enumerate(reversed_list):
-        """Cheking our list numbers with Lune's Algorithm"""
         if i % 2 == 1:
             doubled = digit * 2
             if doubled > 9:

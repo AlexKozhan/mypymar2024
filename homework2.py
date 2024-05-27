@@ -10,16 +10,12 @@
 Для n = 10 и first_number = 2 вывод должен быть (n, first_number) = 7."""
 
 
-def searching_number(max_number, first_number):
+def searching_number(n, first_number):
     """Method to find opposite number"""
-    final_number = (first_number + max_number // 2) % max_number
+    final_number = (first_number + n // 2) % n
     return final_number
 
 
-max_number1 = 10
-first_number1 = 3
-print('(n, first_number) = ', searching_number(max_number1, first_number1))
-
-max_number2 = 9
-first_number2 = 2
-print('(n, first_number) = ', searching_number(max_number2, first_number2))
+Max_Number1 = 10
+First_Number1 = 3
+print('(n, first_number) = ', searching_number(Max_Number1, First_Number1))

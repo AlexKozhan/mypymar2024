@@ -40,7 +40,6 @@ def strictly_increasing_without_one_element(massiv):
 
     for i in range(len(massiv)):
         temp_massiv = massiv[:i] + massiv[i + 1:]
-        """deleting 1 element in list to have increased list"""
         if is_increasing(temp_massiv):
             return True
 
