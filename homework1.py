@@ -38,15 +38,12 @@ def strictly_increasing_without_one_element(massiv):
     if is_increasing(massiv):
         return True
 
-    """A try to delete 1 element in list to have increased list"""
     for i in range(len(massiv)):
-        """temporary list without element with index i"""
+        """A try to delete 1 element in list to have increased list"""
         temp_massiv = massiv[:i] + massiv[i + 1:]
-        """if final list is incrasing then we can result with True"""
         if is_increasing(temp_massiv):
             return True
 
-    """if final list is тще incrasing then we can result with False"""
     return False
 
 

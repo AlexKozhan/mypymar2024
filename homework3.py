@@ -15,12 +15,12 @@ def validator(card_number):
     if not isinstance(card_number, str) or not card_number.isdigit():
         return False
 
-    """Converting a string to a list in reverse for Lune Algorithm"""
     reversed_list = [int(d) for d in card_number][::-1]
+    """Converting a string to a list in reverse for Lune Algorithm"""
 
-    """Cheking our list numbers with Lune Algorithm"""
     temp_sum = 0
     for i, digit in enumerate(reversed_list):
+        """Cheking our list numbers with Lune Algorithm"""
         if i % 2 == 1:
             doubled = digit * 2
             if doubled > 9:
