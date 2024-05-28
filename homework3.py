@@ -13,6 +13,7 @@
 
 
 def count_letters(s):
+    """Function allows to count same letters"""
     if not s:
         return ""
 

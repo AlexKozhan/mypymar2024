@@ -14,13 +14,15 @@
 
 
 def sortirovka(a):
+    """Deleting element 'i-1' when we face i=#
+    and puting other elements of string in 'masiv'"""
     masiv = []
     for i in a:
-       if i == '#':
-           if masiv:
-               masiv.pop()
-       else:
-           masiv.append(i)
+        if i == '#':
+            if masiv:
+                masiv.pop()
+        else:
+            masiv.append(i)
     return ''.join(masiv)
 
 

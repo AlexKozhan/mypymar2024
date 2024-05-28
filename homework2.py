@@ -31,6 +31,7 @@ assert solution(2, 3) == 2"""
 
 
 def solution(candles_number, make_new):
+    """Cheking the total number of candles we can burn"""
     total_burned = 0
     leftovers = 0
 
