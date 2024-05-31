@@ -52,8 +52,8 @@ solution3 = [1, 3, 2, 1]
 solution4 = [1, 2, 3, 4, 5, 3, 5, 6]
 solution5 = [40, 50, 60, 10, 20, 30]
 
-assert strictly_increasing_without_one_element(solution1) == True
-assert strictly_increasing_without_one_element(solution2) == True
-assert strictly_increasing_without_one_element(solution3) == False
-assert strictly_increasing_without_one_element(solution4) == True
-assert strictly_increasing_without_one_element(solution5) == False
+assert strictly_increasing_without_one_element(solution1)
+assert strictly_increasing_without_one_element(solution2)
+assert not strictly_increasing_without_one_element(solution3)
+assert strictly_increasing_without_one_element(solution4)
+assert not strictly_increasing_without_one_element(solution5)
