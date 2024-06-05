@@ -51,11 +51,3 @@ assert solution(12, 2) == 23
 assert solution(6, 4) == 7
 assert solution(13, 5) == 16
 assert solution(2, 3) == 2
-
-print(solution(5, 2))
-print(solution(1, 2))
-print(solution(15, 5))
-print(solution(12, 2))
-print(solution(6, 4))
-print(solution(13, 5))
-print(solution(2, 3))

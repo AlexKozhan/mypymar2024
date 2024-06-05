@@ -13,7 +13,7 @@
 """
 
 
-def sortirovka(a):
+def sorting(a):
     """Deleting element 'i-1' when we face i=#
     and puting other elements of string in 'masiv'"""
     masiv = []
@@ -26,8 +26,8 @@ def sortirovka(a):
     return ''.join(masiv)
 
 
-print(sortirovka("a#bc#d"))
-print(sortirovka("abc#d##c"))
-print(sortirovka("abc##d######"))
-print(sortirovka("#######"))
-print(sortirovka(""))
+assert sorting("a#bc#d") == "bd", 'no result'
+assert sorting("abc#d##c") == "ac", 'no result'
+assert sorting("abc##d######") == "", 'no result'
+assert sorting("#######") == "", 'no result'
+assert sorting("") == "", 'no result'
