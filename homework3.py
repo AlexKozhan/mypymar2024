@@ -23,6 +23,7 @@ add(0.1, 0.2, 0.4) -> 0.7000000000000001"""
 
 
 def typed(data_type):
+    """Decorator that converts function arguments to a specific data type."""
     def inner(func):
         def wrapper(*args):
             converted_args = map(data_type, args)
@@ -33,16 +34,19 @@ def typed(data_type):
 
 @typed(data_type=str)
 def add(a, b):
+    """Function for concatenating two strings."""
     return a + b
 
 
 @typed(data_type=int)
 def add_int(a, b, c):
+    """Function for adding three integers."""
     return a + b + c
 
 
 @typed(data_type=float)
 def add_float(a, b, c):
+    """function for adding three floating point numbers."""
     return a + b + c
 
 

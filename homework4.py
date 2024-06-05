@@ -28,6 +28,7 @@ print(fibonacci(5))  # Вывод: 5 (значение взято из кэша)
 
 
 def cache(func):
+    """Decorator that caches the results of function calls."""
     cached_data = {}
 
     def wrapper(*args):
@@ -40,6 +41,7 @@ def cache(func):
 
 @cache
 def fibonacci(n):
+    """Function for calculating the Fibonacci number"""
     if n <= 1:
         return n
     return fibonacci(n - 1) + fibonacci(n - 2)

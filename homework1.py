@@ -13,16 +13,19 @@
 
 
 def validate_arguments(func):
+    """Decorator that checks that all
+    function arguments are positive numbers."""
     def wrapper(*args):
         for i in args:
             if i <= 0:
-                raise ValueError(f'Введите положительные числа')
+                raise ValueError('Введите положительные числа')
         return func(*args)
     return wrapper
 
 
 @validate_arguments
 def numbers(*args):
+    """Function that prints positive numbers"""
     return f'Введенные числа - положительные: {", ".join(map(str, args))}'
 
 
