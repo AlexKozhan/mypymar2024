@@ -34,6 +34,6 @@ def plus_strings(a, b):
 
 assert plus_numbers(100, 1) == 101, "plus_numbers(100, 1) should return 101"
 
-result = plus_strings("1", "werrere")
-assert result is None, ("plus_strings('1', 'werrere') should "
+RESULT = plus_strings("1", "werrere")
+assert RESULT is None, ("plus_strings('1', 'werrere') should "
                         "return None due to type error")
