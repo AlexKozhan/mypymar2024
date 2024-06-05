@@ -1,33 +1,29 @@
-"""Напишите программу, которая бы работала
-следующим образом - находила символ "#" и если
-этот символ найден - удаляла предыдущий символ
-из строки. Ваша задача обработать строки с "#" символом.
+"""Напишите декоратор @validate_arguments, который
+проверяет, что все аргументы функции являются
+положительными числами. Если встречается аргумент,
+не соответствующий этому условию, функция должна вывести
+сообщение об ошибке. Вот некоторые подсказки:
 
-Примеры:
-
-"a#bc#d" ==>  "bd"
-"abc#d##c"      ==>  "ac"
-"abc##d######"  ==>  ""
-"#######"       ==>  ""
-""              ==>  ""
-"""
-
-
-def sorting(a):
-    """Deleting element 'i-1' when we face i=#
-    and puting other elements of string in 'masiv'"""
-    masiv = []
-    for i in a:
-        if i == '#':
-            if masiv:
-                masiv.pop()
-        else:
-            masiv.append(i)
-    return ''.join(masiv)
+Внутри декоратора, используйте цикл for для перебора
+аргументов функции.
+Используйте оператор if для проверки, является ли
+аргумент положительным числом.
+Если аргумент не соответствует условию, используйте
+оператор raise для вызова исключения ValueError."""
 
 
-assert sorting("a#bc#d") == "bd", 'no result'
-assert sorting("abc#d##c") == "ac", 'no result'
-assert sorting("abc##d######") == "", 'no result'
-assert sorting("#######") == "", 'no result'
-assert sorting("") == "", 'no result'
+def validate_arguments(func):
+    def wrapper(*args):
+        for i in args:
+            if i <= 0:
+                raise ValueError(f'Введите положительные числа')
+        return func(*args)
+    return wrapper
+
+
+@validate_arguments
+def numbers(*args):
+    return f'Введенные числа - положительные: {", ".join(map(str, args))}'
+
+
+print(numbers(40, 50, 20, 10, 1))
