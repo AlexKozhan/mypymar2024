@@ -39,8 +39,7 @@ class Bank:
         amount to the user's account.
         """
         deposit_instance = Deposit()
-        final_money = (deposit_instance.calculate_final_money
-                       (money, duration))
+        final_money = deposit_instance.calculate_final_money(money, duration)
         return final_money
 
 
