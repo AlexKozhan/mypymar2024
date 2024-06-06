@@ -9,7 +9,10 @@
 
 
 class Deposit:
-    def calculate_final_money(self, money: float, years: int,
+    """
+    Represents a deposit.
+    """
+    def calculate_final_money(self, money: float, duration: int,
                               annual_rate: float = 0.25):
         """
         Calculates the total deposit amount taking
@@ -17,26 +20,32 @@ class Deposit:
         """
         m = money
         n = 12
-        y = years
+        y = duration
         r = annual_rate
         a = m * (1 + r / n) ** (n * y)
         return a
 
 
 class Bank:
-    def deposit(self, money: float, years: int):
+    """
+    Represents a bank.
+    """
+    def deposit(self, money: float, duration: int):
         """
         Accepts the deposit amount and term, returns the total
         amount to the user's account.
         """
-        deposit = Deposit()
-        final_money = deposit.calculate_final_money(money, years)
+        deposit_instance = Deposit()
+        final_money = (deposit_instance.calculate_final_money
+                       (money, duration))
         return final_money
 
 
-initial_money = 125
-years = 7
+INITIAL_MONEY = 125
+DURATION = 7
 
 bank = Bank()
-final_money = bank.deposit(initial_money, years)
-print(f"Сумма на счету пользователя через {years} лет: {final_money:.2f} рублей")
+final_money = bank.deposit(INITIAL_MONEY, DURATION)
+print(f"Сумма на счету пользователя через {DURATION} "
+      f"лет: {final_money:.2f} рублей")
+

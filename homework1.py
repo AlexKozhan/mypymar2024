@@ -10,9 +10,12 @@
 
 
 class Book:
-    def set_details(self, title, author, pages, isbn):
+    """
+    Represents a book.
+    """
+    def __init__(self, title, author, pages, isbn):
         """
-        Set details of the book.
+        Initialize a Book object with its details.
         """
         self.title = title
         self.author = author
@@ -62,9 +65,12 @@ class Book:
 
 
 class User:
-    def set_details(self, name):
+    """
+    Represents a user.
+    """
+    def __init__(self, name):
         """
-        Set details of the user.
+        Initialize a User object with its name.
         """
         self.name = name
 
@@ -87,18 +93,13 @@ class User:
         book.return_book()
 
 
-book1 = Book()
-book1.set_details("White fang", "Jack London",
-                  100, "1234567890")
-book2 = Book()
-book2.set_details("Animals",
-                  "Ivan Ivanov", 101,
-                  "2232442")
+book1 = Book("White fang", "Jack London",
+             100, "1234567890")
+book2 = Book("Animals", "Ivan Ivanov",
+             101, "2232442")
 
-user1 = User()
-user1.set_details("Alex")
-user2 = User()
-user2.set_details("Siarhei")
+user1 = User("Alex")
+user2 = User("Siarhei")
 
 user1.reserve_book(book1)
 user2.reserve_book(book2)
@@ -108,3 +109,4 @@ user1.take_book(book2)
 
 user1.return_book(book1)
 user2.return_book(book2)
+
