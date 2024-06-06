@@ -109,4 +109,3 @@ user1.take_book(book2)
 
 user1.return_book(book1)
 user2.return_book(book2)
-

@@ -13,7 +13,7 @@ class Deposit:
     Represents a deposit.
     """
     def calculate_final_money(self, money: float, duration: int,
-                              annual_rate: float = 0.25):
+                              annual_rate: float = 0.25) -> float:
         """
         Calculates the total deposit amount taking
         into account the monthly capitalization of interest.
@@ -30,7 +30,10 @@ class Bank:
     """
     Represents a bank.
     """
-    def deposit(self, money: float, duration: int):
+    def __init__(self):
+        pass
+
+    def deposit(self, money: float, duration: int) -> float:
         """
         Accepts the deposit amount and term, returns the total
         amount to the user's account.
@@ -48,4 +51,3 @@ bank = Bank()
 final_money = bank.deposit(INITIAL_MONEY, DURATION)
 print(f"Сумма на счету пользователя через {DURATION} "
       f"лет: {final_money:.2f} рублей")
-
