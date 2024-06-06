@@ -12,6 +12,7 @@ class Deposit:
     """
     Represents a deposit.
     """
+
     def calculate_final_money(self, money: float, duration: int,
                               annual_rate: float = 0.25) -> float:
         """
@@ -25,11 +26,18 @@ class Deposit:
         a = m * (1 + r / n) ** (n * y)
         return a
 
+    def display_deposit_info(self):
+        """
+        Displays information about the deposit.
+        """
+        print("This class represents a deposit.")
+
 
 class Bank:
     """
     Represents a bank.
     """
+
     def __init__(self):
         pass
 
@@ -39,14 +47,21 @@ class Bank:
         amount to the user's account.
         """
         deposit_instance = Deposit()
-        final_money = deposit_instance.calculate_final_money(money, duration)
-        return final_money
+        final_money_result = (deposit_instance.calculate_final_money
+                              (money, duration))
+        return final_money_result
+
+    def bank_info(self):
+        """
+        Displays information about the bank.
+        """
+        print("This class represents a bank.")
 
 
 INITIAL_MONEY = 125
 DURATION = 7
 
 bank = Bank()
-final_money = bank.deposit(INITIAL_MONEY, DURATION)
+final_money_amount = bank.deposit(INITIAL_MONEY, DURATION)
 print(f"Сумма на счету пользователя через {DURATION} "
-      f"лет: {final_money:.2f} рублей")
+      f"лет: {final_money_amount:.2f} рублей")
