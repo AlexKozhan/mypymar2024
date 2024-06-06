@@ -1,53 +1,42 @@
-"""Когда свеча догорает, остается остаток. Остатки можно
-объединить, чтобы создать новую свечу, которая при догорании
-, в свою очередь, оставит еще один остаток. У вас есть
-количество свечей. Какое общее количество свечей вы можете
-сжечь, если предположить, что вы создадите новые свечи,
-как только у вас останется достаточно остатков?
-
-Пример Если у Вас 5(candles_number) свечей, и из 2х(make_new)
- остатков вы можете сделать 1 новую свечу, то ответе будет: 9.
-
-По шагам, чтобы сжечь 9 свечей:
-
-сожгите 5 свечей, получите 5 остатков;
-создайте еще 2 свечи, используя 4 остатка (остался 1);
-сожгите 2 свечи, в итоге останется 3 остатка;
-создайте еще одну свечу, используя 2 остатка (остался 1);
-сожгите созданную свечу, что даст еще один остаток (всего 2 остатка);
-создать свечу из оставшихся остатков;
-зажгите последнюю свечу.
-Таким образом, можно сжечь 5+2+1+1=9 свечей, что и является ответом.
-
-Проверка работоспособности:
-
-assert solution(5, 2) == 9
-assert solution(1, 2) == 1
-assert solution(15, 5) == 18
-assert solution(12, 2) == 23
-assert solution(6, 4) == 7
-assert solution(13, 5) == 16
-assert solution(2, 3) == 2"""
+"""Создайте класс вклад. Который содержит необходимые
+ поля и методы, например сумма вклада и его срок.
+ Пользователь делает вклад в размере N рублей сроком
+ на R лет под 10% годовых (вклад с возможностью ежемесячной
+  капитализации - это означает, что проценты прибавляются
+   к сумме вклада ежемесячно). Написать класс Bank,
+   метод deposit принимает аргументы N и R, и
+   возвращает сумму, которая будет на счету пользователя."""
 
 
-def solution(candles_number, make_new):
-    """Cheking the total number of candles we can burn"""
-    total_burned = 0
-    leftovers = 0
+class Deposit:
+    def calculate_final_money(self, money: float, years: int,
+                              annual_rate: float = 0.25):
+        """
+        Calculates the total deposit amount taking
+        into account the monthly capitalization of interest.
+        """
+        m = money
+        n = 12
+        y = years
+        r = annual_rate
+        a = m * (1 + r / n) ** (n * y)
+        return a
 
-    while candles_number > 0:
-        total_burned += candles_number
-        new_leftovers = candles_number + leftovers
-        candles_number = new_leftovers // make_new
-        leftovers = new_leftovers % make_new
 
-    return total_burned
+class Bank:
+    def deposit(self, money: float, years: int):
+        """
+        Accepts the deposit amount and term, returns the total
+        amount to the user's account.
+        """
+        deposit = Deposit()
+        final_money = deposit.calculate_final_money(money, years)
+        return final_money
 
 
-assert solution(5, 2) == 9
-assert solution(1, 2) == 1
-assert solution(15, 5) == 18
-assert solution(12, 2) == 23
-assert solution(6, 4) == 7
-assert solution(13, 5) == 16
-assert solution(2, 3) == 2
+initial_money = 125
+years = 7
+
+bank = Bank()
+final_money = bank.deposit(initial_money, years)
+print(f"Сумма на счету пользователя через {years} лет: {final_money:.2f} рублей")
