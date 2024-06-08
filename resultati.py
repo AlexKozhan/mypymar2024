@@ -15,7 +15,7 @@ def validate_type(func):
         if not isinstance(inner_result, (int, float)):
             print(f"Result of function is "
                   f"not a number, instead it's {type(inner_result)}")
-            return None
+            return False
         return inner_result
     return wrapper
 

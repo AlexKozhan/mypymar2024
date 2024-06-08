@@ -17,8 +17,8 @@ def validate_arguments(func):
     function arguments are positive numbers."""
     def wrapper(*args):
         for i in args:
-            if i <= 0:
-                raise ValueError('Введите положительные числа')
+            if i < 0:
+                raise ValueError('Числа должны быть положительными')
         return func(*args)
     return wrapper
 
