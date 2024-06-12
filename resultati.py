@@ -21,19 +21,14 @@ def validate_type(func):
 
 
 @validate_type
-def plus_numbers(a, b):
-    """Function for plussing two numbers."""
+def plus_two_value(a, b):
+    """Function for concatenating two values"""
     return a + b
 
 
-@validate_type
-def plus_strings(a, b):
-    """Function for concatenating two strings."""
-    return a + b
+assert plus_two_value(100, 1) == 101, ("plus_two_value(100, 1) "
+                                       "should return 101")
 
-
-assert plus_numbers(100, 1) == 101, "plus_numbers(100, 1) should return 101"
-
-RESULT = plus_strings("1", "werrere")
-assert RESULT is None, ("plus_strings('1', 'werrere') should "
+RESULT = plus_two_value("1", "werrere")
+assert RESULT is None, ("plus_two_value('1', 'werrere') should "
                         "return None due to type error")
