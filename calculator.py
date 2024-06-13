@@ -17,7 +17,15 @@ import sys
 
 
 def calculate_expression(expression):
-    tokens = re.findall(r'[+-]?\d*\.\d+|\d+|[+-/*//**]', expression)
+    """
+    Evaluates a mathematical expression given as a string.
+    Returns:
+    float: The result of the expression evaluation.
+    Raises:
+    ValueError: If the expression contains invalid characters.
+    ZeroDivisionError: If the expression involves division by zero.
+    """
+    tokens = re.findall(r'[+-]?\d*\.\d+|\d+|[+\-*///**]', expression)
 
     result = float(tokens[0])
 
@@ -33,33 +41,37 @@ def calculate_expression(expression):
             result *= float(tokens[i])
         elif operator == '/':
             if float(tokens[i]) == 0:
-                print("Ошибка: деление на ноль")
-                sys.exit(1)
+                raise ZeroDivisionError("Error: division by zero")
             result /= float(tokens[i])
         elif operator == '//':
             if float(tokens[i]) == 0:
-                print("Ошибка: деление на ноль")
-                sys.exit(1)
+                raise ZeroDivisionError("Error: division by zero")
             result //= float(tokens[i])
         elif operator == '**':
             result **= float(tokens[i])
         else:
-            print("Ошибка: недопустимый оператор")
-            sys.exit(1)
+            raise ValueError("Error: invalid operator")
         i += 1
 
     return result
 
 
 def main():
-    print("Введите математическое выражение (например, '10 - 3 + 18'): ")
+    """
+    Main function of the program. Prompts the user for a
+    mathematical expression and prints the result of its
+    evaluation.
+    """
+    print("Enter a mathematical expression (e.g., '10 - 3 + 18'): ")
     user_input = input("~ ")
 
     try:
         result = calculate_expression(user_input)
-        print(f"Результат: {result}")
-    except Exception as e:
-        print(f"Ошибка: {e}")
+        print(f"Result: {result}")
+    except ValueError as ve:
+        print(f"Error: {ve}")
+    except ZeroDivisionError as zde:
+        print(f"Error: {zde}")
 
 
 if __name__ == "__main__":

@@ -11,6 +11,9 @@
 
 
 def write_students_data(file_name):
+    """
+    Write students' data to a file.
+    """
     students_data = [
         {"name": "Alex", "group": 1, "grades": [8, 9, 7]},
         {"name": "Masha", "group": 2, "grades": [6, 7, 2]},
@@ -20,10 +23,9 @@ def write_students_data(file_name):
     ]
 
     try:
-        with open(file_name, 'w') as file:
+        with open(file_name, 'w', encoding='utf-8') as file:
             for student in students_data:
-                file.write(f"{student['name']},"
-                           f"{student['group']},"
+                file.write(f"{student['name']},{student['group']},"
                            f"{','.join(map(str, student['grades']))}\n")
         print(f"Data successfully written to {file_name}")
     except IOError as e:
@@ -31,8 +33,11 @@ def write_students_data(file_name):
 
 
 def read_and_print_statistics(file_name):
+    """
+    Read student data from a file, calculate statistics, and print them.
+    """
     try:
-        with open(file_name, 'r') as file:
+        with open(file_name, 'r', encoding='utf-8') as file:
             lines = file.readlines()
 
             total_students = len(lines)
@@ -58,7 +63,7 @@ def read_and_print_statistics(file_name):
                 print(f"Average grade for Group {group}: {average_grade:.2f}")
 
             # Append statistics to the file
-            with open(file_name, 'a') as file:
+            with open(file_name, 'a', encoding='utf-8') as file:
                 file.write("\nStatistics:\n")
                 file.write(f"Total number of students: {total_students}\n")
                 for group, count in group_counts.items():
@@ -71,8 +76,9 @@ def read_and_print_statistics(file_name):
         print(f"Error reading from {file_name}: {e}")
 
 
-file_name = "students.txt"
+if __name__ == "__main__":
+    FILE_NAME = "students.txt"
 
-write_students_data(file_name)
+    write_students_data(FILE_NAME)
 
-read_and_print_statistics(file_name)
+    read_and_print_statistics(FILE_NAME)
