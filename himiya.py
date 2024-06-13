@@ -19,8 +19,7 @@ K4[ON(SO3)2]2 -> {K: 4, O: 14, N: 2, S: 4}
 
 from collections import defaultdict
 import copy
-from typing import Dict  # Import Dict type for type annotation
-
+from typing import Dict
 
 class Himiya:
     """
@@ -32,15 +31,13 @@ class Himiya:
         pass
 
     def count_of_atoms(self, formula: str) -> Dict[str, int]:
-        # Specify return type
         """
         Parse the given chemical formula and
         return a dictionary with the count of
         each type of atom.
         """
-        stack = []  # Stack to hold dictionaries of atom
-        current: Dict[str, int] = defaultdict(int)
-        # Type annotation for current
+        stack = []  # Stack to hold dictionaries of atom counts
+        current: Dict[str, int] = defaultdict(int)  # Current atom counts
 
         i = 0  # Index to iterate over the formula
         while i < len(formula):
@@ -55,12 +52,8 @@ class Himiya:
                     j += 1
 
                 num = 1 if j == i + 1 else int(formula[i + 1:j])
-                for key in current.keys():
-                    current[key] *= num
-
-                for key, value in current.items():
-                    stack[-1][key] += value
-
+                self.multiply_current(current, num)
+                self.add_current_to_stack_top(stack, current)
                 current = stack.pop(-1)
                 i = j
 
@@ -78,16 +71,38 @@ class Himiya:
                     current[atom] += num
                     i = k
 
+        self.add_remaining_to_stack(stack, current)  # Add
+        # remaining counts to the top of stack
+
+        return dict(sorted(current.items()))
+
+    def multiply_current(self, current: Dict[str, int], num: int):
+        """
+        Multiply current atom counts by a number.
+        """
+        for key in current.keys():
+            current[key] *= num
+
+    def add_current_to_stack_top(self, stack: list,
+                                 current: Dict[str, int]):
+        """
+        Add current atom counts to the top of stack.
+        """
+        for key, value in current.items():
+            stack[-1][key] += value
+
+    def add_remaining_to_stack(self, stack: list,
+                               current: Dict[str, int]):
+        """
+        Add remaining atom counts to the top of stack.
+        """
         while stack:
             top = stack.pop()
             for key, value in current.items():
                 top[key] += value
             current = top
 
-        return dict(sorted(current.items()))
-
     def get_sorted_atom_counts(self, formula: str) -> Dict[str, int]:
-        # Specify return type
         """
         Returns a dictionary with sorted counts of each type of atom
         in the given chemical formula.

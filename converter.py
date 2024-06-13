@@ -50,7 +50,8 @@ class Bank:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        converted_amount = self.currency_converter.convert(from_currency, to_currency, amount)
+        converted_amount = (self.currency_converter.convert
+                            (from_currency, to_currency, amount))
         return converted_amount, to_currency
 
 
