@@ -41,7 +41,8 @@ class Himiya:
 
         i = 0  # Index to iterate over the formula
         while i < len(formula):
-            if formula[i] in '([{':  # If opening bracket, push current dictionary to stack and start a new one
+            if formula[i] in '([{':  # If opening bracket, push current
+                # dictionary to stack and start a new one
                 stack.append(copy.deepcopy(current))
                 current.clear()
                 i += 1

@@ -88,25 +88,14 @@ class Currency:
         rate = self.rates[from_currency][to_currency]
         return round(amount * rate, 2)
 
-    def get_exchange_rate(self, from_currency: str, to_currency: str) -> float:
+    def get_supported_currencies(self):
         """
-        Retrieves the exchange rate from one currency to another.
-
-        Args:
-            from_currency (str): The currency code to convert from.
-            to_currency (str): The currency code to convert to.
+        Returns a list of all supported currency codes.
 
         Returns:
-            float: The exchange rate.
-
-        Raises:
-            ValueError: If invalid currency codes are provided.
+            list: List of supported currency codes.
         """
-        if (from_currency not in self.rates or to_currency
-                not in self.rates[from_currency]):
-            raise ValueError("Invalid currency codes")
-
-        return self.rates[from_currency][to_currency]
+        return list(self.rates.keys())
 
 
 class Person:
@@ -134,6 +123,26 @@ class Person:
         """
         self.amount += additional_amount
 
+    def withdraw_amount(self, withdrawal_amount: float):
+        """
+        Withdraws the specified amount from the current amount.
+
+        Args:
+            withdrawal_amount (float): The amount to withdraw.
+
+        Raises:
+            ValueError: If the withdrawal amount exceeds the current amount.
+        """
+        if withdrawal_amount > self.amount:
+            raise ValueError("Withdrawal amount exceeds current amount")
+        self.amount -= withdrawal_amount
+
+    def check_balance(self):
+        """
+        Returns the current amount balance.
+        """
+        return self.amount
+
 
 # Example usage and testing
 if __name__ == "__main__":
@@ -149,9 +158,14 @@ if __name__ == "__main__":
             == (17.6, "BYN")), "Error converting from EUR to BYN"
 
     # Testing conversion to specified currency
-    assert (bank.exchange_currency(vasya.currency, vasya.amount, 'EUR')
-            == (9.29, "EUR")), "Error converting from USD to EUR"
-    assert (bank.exchange_currency(petya.currency, petya.amount, 'USD')
-            == (5.38, "USD")), "Error converting from EUR to USD"
+    assert bank.exchange_currency(vasya.currency, vasya.amount, 'EUR') == (
+    9.29, "EUR"), "Error converting from USD to EUR"
+    assert bank.exchange_currency(petya.currency, petya.amount, 'USD') == (
+    5.38, "USD"), "Error converting from EUR to USD"
 
+    # Testing Person class methods
+    vasya.add_amount(20)
+    assert vasya.check_balance() == 30, "Error in adding amount to vasya"
 
+    petya.withdraw_amount(3)
+    assert petya.check_balance() == 2, "Error in withdrawing amount from petya"
