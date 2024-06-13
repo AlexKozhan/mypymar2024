@@ -19,6 +19,7 @@ K4[ON(SO3)2]2 -> {K: 4, O: 14, N: 2, S: 4}
 
 from collections import defaultdict
 import copy
+from typing import Dict  # Import Dict type for type annotation
 
 
 class Himiya:
@@ -30,62 +31,53 @@ class Himiya:
     def __init__(self):
         pass
 
-    def count_of_atoms(self, formula: str) -> dict:
+    def count_of_atoms(self, formula: str) -> Dict[str, int]:
+        # Specify return type
         """
         Parse the given chemical formula and
         return a dictionary with the count of
         each type of atom.
         """
         stack = []  # Stack to hold dictionaries of atom
-        # counts at different levels of nesting
-        current = defaultdict(int)  # Current dictionary of atom counts
+        current: Dict[str, int] = defaultdict(int)
+        # Type annotation for current
 
         i = 0  # Index to iterate over the formula
         while i < len(formula):
-            if formula[i] in '([{':  # If opening bracket, push current
-                # dictionary to stack and start a new one
+            if formula[i] in '([{':
                 stack.append(copy.deepcopy(current))
                 current.clear()
                 i += 1
 
-            elif formula[i] in ')]}':  # If closing bracket, process
-                # the nested formula
+            elif formula[i] in ')]}':
                 j = i + 1
                 while j < len(formula) and formula[j].isdigit():
                     j += 1
 
-                # Multiplier for the nested formula
                 num = 1 if j == i + 1 else int(formula[i + 1:j])
                 for key in current.keys():
                     current[key] *= num
 
-                # Merge current dictionary with the top
-                # dictionary from the stack
                 for key, value in current.items():
                     stack[-1][key] += value
 
-                current = stack.pop(-1)  # Pop the top dictionary
-                # from the stack
+                current = stack.pop(-1)
                 i = j
 
             else:
-                if formula[i].isupper():  # If it's an atom symbol
+                if formula[i].isupper():
                     j = i + 1
                     while j < len(formula) and formula[j].islower():
                         j += 1
 
-                    atom = formula[i:j]  # Extract the atom symbol
-
+                    atom = formula[i:j]
                     k = j
                     while k < len(formula) and formula[k].isdigit():
                         k += 1
                     num = 1 if j == k else int(formula[j:k])
-                    # Extract the count
-                    current[atom] += num  # Add the atom count
-                    # to the current dictionary
+                    current[atom] += num
                     i = k
 
-        # Merge any remaining dictionaries in the stack
         while stack:
             top = stack.pop()
             for key, value in current.items():
@@ -94,7 +86,8 @@ class Himiya:
 
         return dict(sorted(current.items()))
 
-    def get_sorted_atom_counts(self, formula: str) -> dict:
+    def get_sorted_atom_counts(self, formula: str) -> Dict[str, int]:
+        # Specify return type
         """
         Returns a dictionary with sorted counts of each type of atom
         in the given chemical formula.
@@ -106,17 +99,12 @@ class Himiya:
         """
         Validates if the given formula is a valid chemical formula.
         """
-        # Implement validation logic here (example: check
-        # for balanced parentheses)
-        # For simplicity, assuming parentheses are always
-        # balanced in this case
         return True  # Placeholder for validation logic
 
     def get_supported_elements(self) -> list:
         """
         Returns a list of supported element symbols.
         """
-        # Placeholder for actual supported elements
         return ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne']
 
 
@@ -138,15 +126,12 @@ if __name__ == "__main__":
         f"Error: {solution.count_of_atoms('K4[ON(SO3)2]2')}"
     )
 
-    # Additional method usage example:
     sorted_counts = solution.get_sorted_atom_counts("K4[ON(SO3)2]2")
     print("Sorted Atom Counts:", sorted_counts)
 
-    # Validation example:
     FORMULA_TO_VALIDATE = "H2O"
     IS_VALID = solution.validate_formula()
     print(f"Is '{FORMULA_TO_VALIDATE}' a valid formula?: {IS_VALID}")
 
-    # Supported elements example:
     supported_elements = solution.get_supported_elements()
     print("Supported Elements:", supported_elements)

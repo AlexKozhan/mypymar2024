@@ -28,6 +28,7 @@ class Bank:
     Represents a bank that performs currency exchange.
     """
 
+    # pylint: disable=too-few-public-methods
     def __init__(self):
         self.currency_converter = Currency()
 
@@ -49,8 +50,7 @@ class Bank:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        converted_amount = self.currency_converter.convert(
-            from_currency, to_currency, amount)
+        converted_amount = self.currency_converter.convert(from_currency, to_currency, amount)
         return converted_amount, to_currency
 
 
@@ -67,7 +67,8 @@ class Currency:
             'BYN': {'USD': 0.306, 'EUR': 0.284}
         }
 
-    def convert(self, from_currency: str, to_currency: str, amount: float) -> float:
+    def convert(self, from_currency: str, to_currency: str,
+                amount: float) -> float:
         """
         Converts the specified amount from one currency to another.
 
