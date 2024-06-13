@@ -21,6 +21,7 @@ from collections import defaultdict
 import copy
 from typing import Dict
 
+
 class Himiya:
     """
     A class to parse a chemical formula
