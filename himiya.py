@@ -95,7 +95,7 @@ class Himiya:
         atom_counts = self.count_of_atoms(formula)
         return dict(sorted(atom_counts.items()))
 
-    def validate_formula(self, formula: str) -> bool:
+    def validate_formula(self) -> bool:
         """
         Validates if the given formula is a valid chemical formula.
         """
@@ -114,13 +114,18 @@ class Himiya:
 if __name__ == "__main__":
     solution = Himiya()
 
-    assert solution.count_of_atoms("H2O") == {'H': 2, 'O': 1}, (
+    expected_result = {'H': 2, 'O': 1}
+    assert solution.count_of_atoms("H2O") == expected_result, (
         f"Error: {solution.count_of_atoms('H2O')}"
     )
-    assert solution.count_of_atoms("Mg(OH)2") == {'Mg': 1, 'O': 2, 'H': 2}, (
+
+    expected_result = {'Mg': 1, 'O': 2, 'H': 2}
+    assert solution.count_of_atoms("Mg(OH)2") == expected_result, (
         f"Error: {solution.count_of_atoms('Mg(OH)2')}"
     )
-    assert solution.count_of_atoms("K4[ON(SO3)2]2") == {'K': 4, 'O': 14, 'N': 2, 'S': 4}, (
+
+    expected_result = {'K': 4, 'O': 14, 'N': 2, 'S': 4}
+    assert solution.count_of_atoms("K4[ON(SO3)2]2") == expected_result, (
         f"Error: {solution.count_of_atoms('K4[ON(SO3)2]2')}"
     )
 
@@ -129,9 +134,9 @@ if __name__ == "__main__":
     print("Sorted Atom Counts:", sorted_counts)
 
     # Validation example:
-    formula_to_validate = "H2O"
-    is_valid = solution.validate_formula(formula_to_validate)
-    print(f"Is '{formula_to_validate}' a valid formula?: {is_valid}")
+    FORMULA_TO_VALIDATE = "H2O"
+    IS_VALID = solution.validate_formula()
+    print(f"Is '{FORMULA_TO_VALIDATE}' a valid formula?: {IS_VALID}")
 
     # Supported elements example:
     supported_elements = solution.get_supported_elements()

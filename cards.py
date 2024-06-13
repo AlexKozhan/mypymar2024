@@ -25,12 +25,11 @@ class Card:
         """Returns the numeric value of the card."""
         if self.number.isdigit():
             return int(self.number)
-        elif self.number in ['J', 'Q', 'K']:
+        if self.number in ['J', 'Q', 'K']:
             return 10
-        elif self.number == 'A':
+        if self.number == 'A':
             return 11  # For simplicity, assuming Ace always equals 11
-        else:
-            return 0  # Return 0 for jokers or invalid cards
+        return 0  # Return 0 for jokers or invalid cards
 
 
 class CardsDeck:

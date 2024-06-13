@@ -50,7 +50,7 @@ class Bank:
         """
         converted_amount = (self.currency_converter.convert
                             (from_currency, to_currency, amount))
-        return (converted_amount, to_currency)
+        return converted_amount, to_currency
 
 
 class Currency:
@@ -66,8 +66,7 @@ class Currency:
             'BYN': {'USD': 0.306, 'EUR': 0.284}
         }
 
-    def convert(self, from_currency: str,
-                to_currency: str, amount: float) -> float:
+    def convert(self, from_currency: str, to_currency: str, amount: float) -> float:
         """
         Converts the specified amount from one currency to another.
 
@@ -82,14 +81,11 @@ class Currency:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        if from_currency not in self.rates:
-            raise ValueError("Invalid from_currency code")
-
-        if to_currency not in self.rates[from_currency]:
-            raise ValueError("Invalid to_currency code")
+        if (from_currency not in self.rates or to_currency
+                not in self.rates[from_currency]):
+            raise ValueError("Invalid currency codes")
 
         rate = self.rates[from_currency][to_currency]
-
         return round(amount * rate, 2)
 
     def get_exchange_rate(self, from_currency: str, to_currency: str) -> float:
@@ -106,11 +102,9 @@ class Currency:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        if from_currency not in self.rates:
-            raise ValueError("Invalid from_currency code")
-
-        if to_currency not in self.rates[from_currency]:
-            raise ValueError("Invalid to_currency code")
+        if (from_currency not in self.rates or to_currency
+                not in self.rates[from_currency]):
+            raise ValueError("Invalid currency codes")
 
         return self.rates[from_currency][to_currency]
 
@@ -155,9 +149,9 @@ if __name__ == "__main__":
             == (17.6, "BYN")), "Error converting from EUR to BYN"
 
     # Testing conversion to specified currency
-    assert (bank.exchange_currency(vasya.currency,
-                                  vasya.amount, 'EUR')
+    assert (bank.exchange_currency(vasya.currency, vasya.amount, 'EUR')
             == (9.29, "EUR")), "Error converting from USD to EUR"
-    assert (bank.exchange_currency(petya.currency,
-                                  petya.amount, 'USD')
+    assert (bank.exchange_currency(petya.currency, petya.amount, 'USD')
             == (5.38, "USD")), "Error converting from EUR to USD"
+
+
