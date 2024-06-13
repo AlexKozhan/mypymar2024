@@ -43,7 +43,8 @@ class Bank:
             convert to. Defaults to 'BYN'.
 
         Returns:
-            tuple: A tuple containing the converted amount and the currency code.
+            tuple: A tuple containing the converted amount
+            and the currency code.
 
         Raises:
             ValueError: If invalid currency codes are provided.
@@ -66,7 +67,8 @@ class Currency:
             'BYN': {'USD': 0.306, 'EUR': 0.284}
         }
 
-    def convert(self, from_currency: str, to_currency: str, amount: float) -> float:
+    def convert(self, from_currency: str, to_currency:
+    str, amount: float) -> float:
         """
         Converts the specified amount from one currency to another.
 
@@ -81,8 +83,7 @@ class Currency:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        if (from_currency not in self.rates or to_currency
-                not in self.rates[from_currency]):
+        if from_currency not in self.rates or to_currency not in self.rates[from_currency]:
             raise ValueError("Invalid currency codes")
 
         rate = self.rates[from_currency][to_currency]
@@ -96,6 +97,42 @@ class Currency:
             list: List of supported currency codes.
         """
         return list(self.rates.keys())
+
+    def update_exchange_rate(self, from_currency: str, to_currency: str, new_rate: float):
+        """
+        Updates the exchange rate between two currencies.
+
+        Args:
+            from_currency (str): The currency code to convert from.
+            to_currency (str): The currency code to convert to.
+            new_rate (float): The new exchange rate.
+
+        Raises:
+            ValueError: If invalid currency codes are provided.
+        """
+        if from_currency not in self.rates:
+            raise ValueError("Invalid from_currency code")
+        if to_currency not in self.rates[from_currency]:
+            raise ValueError("Invalid to_currency code")
+
+        self.rates[from_currency][to_currency] = new_rate
+
+    def add_currency(self, currency_code: str, exchange_rates: dict):
+        """
+        Adds a new currency and its exchange rates to the converter.
+
+        Args:
+            currency_code (str): The new currency code to add.
+            exchange_rates (dict): A dictionary of exchange rates for
+            the new currency.
+
+        Raises:
+            ValueError: If the currency code already exists.
+        """
+        if currency_code in self.rates:
+            raise ValueError("Currency code already exists")
+
+        self.rates[currency_code] = exchange_rates
 
 
 class Person:
@@ -169,3 +206,12 @@ if __name__ == "__main__":
 
     petya.withdraw_amount(3)
     assert petya.check_balance() == 2, "Error in withdrawing amount from petya"
+
+    currency = Currency()
+    currency.update_exchange_rate('USD', 'EUR', 0.93)
+    assert (currency.convert('USD', 'EUR', 10)
+            == 9.3), "Error in updating exchange rate"
+
+    currency.add_currency('GBP', {'USD': 1.25, 'EUR': 1.15})
+    assert (currency.convert('GBP', 'USD', 10)
+            == 12.5), "Error in adding new currency"

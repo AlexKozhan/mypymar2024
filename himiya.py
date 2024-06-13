@@ -36,7 +36,8 @@ class Himiya:
         return a dictionary with the count of
         each type of atom.
         """
-        stack = []  # Stack to hold dictionaries of atom counts at different levels of nesting
+        stack = []  # Stack to hold dictionaries of atom
+        # counts at different levels of nesting
         current = defaultdict(int)  # Current dictionary of atom counts
 
         i = 0  # Index to iterate over the formula
@@ -47,7 +48,8 @@ class Himiya:
                 current.clear()
                 i += 1
 
-            elif formula[i] in ')]}':  # If closing bracket, process the nested formula
+            elif formula[i] in ')]}':  # If closing bracket, process
+                # the nested formula
                 j = i + 1
                 while j < len(formula) and formula[j].isdigit():
                     j += 1
@@ -57,11 +59,13 @@ class Himiya:
                 for key in current.keys():
                     current[key] *= num
 
-                # Merge current dictionary with the top dictionary from the stack
+                # Merge current dictionary with the top
+                # dictionary from the stack
                 for key, value in current.items():
                     stack[-1][key] += value
 
-                current = stack.pop(-1)  # Pop the top dictionary from the stack
+                current = stack.pop(-1)  # Pop the top dictionary
+                # from the stack
                 i = j
 
             else:
@@ -75,8 +79,10 @@ class Himiya:
                     k = j
                     while k < len(formula) and formula[k].isdigit():
                         k += 1
-                    num = 1 if j == k else int(formula[j:k])  # Extract the count
-                    current[atom] += num  # Add the atom count to the current dictionary
+                    num = 1 if j == k else int(formula[j:k])
+                    # Extract the count
+                    current[atom] += num  # Add the atom count
+                    # to the current dictionary
                     i = k
 
         # Merge any remaining dictionaries in the stack
@@ -100,8 +106,10 @@ class Himiya:
         """
         Validates if the given formula is a valid chemical formula.
         """
-        # Implement validation logic here (example: check for balanced parentheses)
-        # For simplicity, assuming parentheses are always balanced in this case
+        # Implement validation logic here (example: check
+        # for balanced parentheses)
+        # For simplicity, assuming parentheses are always
+        # balanced in this case
         return True  # Placeholder for validation logic
 
     def get_supported_elements(self) -> list:
