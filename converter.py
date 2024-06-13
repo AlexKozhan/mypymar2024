@@ -25,7 +25,7 @@ assert bank.exchange_currency(petya.currency,
 
 class Bank:
     """
-    Represents a bank.
+    Represents a bank that performs currency exchange.
     """
 
     def __init__(self):
@@ -35,6 +35,18 @@ class Bank:
                           amount: float, to_currency: str = 'BYN') -> tuple:
         """
         Converts the specified amount from one currency to another.
+
+        Args:
+            from_currency (str): The currency code to convert from.
+            amount (float): The amount to convert.
+            to_currency (str, optional): The currency code
+            to convert to. Defaults to 'BYN'.
+
+        Returns:
+            tuple: A tuple containing the converted amount and the currency code.
+
+        Raises:
+            ValueError: If invalid currency codes are provided.
         """
         converted_amount = (
             self.currency_converter.convert(from_currency, to_currency, amount))
@@ -42,6 +54,10 @@ class Bank:
 
 
 class Currency:
+    """
+    Represents a currency converter based on predefined exchange rates.
+    """
+
     def __init__(self):
         # Example exchange rates
         self.rates = {
@@ -52,6 +68,20 @@ class Currency:
 
     def convert(self, from_currency: str,
                 to_currency: str, amount: float) -> float:
+        """
+        Converts the specified amount from one currency to another.
+
+        Args:
+            from_currency (str): The currency code to convert from.
+            to_currency (str): The currency code to convert to.
+            amount (float): The amount to convert.
+
+        Returns:
+            float: The converted amount.
+
+        Raises:
+            ValueError: If invalid currency codes are provided.
+        """
         if from_currency not in self.rates:
             raise ValueError("Invalid from_currency code")
 
@@ -64,25 +94,36 @@ class Currency:
 
 
 class Person:
+    """
+    Represents a person with a specific currency and amount.
+    """
+
     def __init__(self, currency: str, amount: float):
+        """
+        Initializes a Person object with given currency and amount.
+
+        Args:
+            currency (str): The currency code.
+            amount (float): The amount of money.
+        """
         self.currency = currency
         self.amount = amount
 
 
-# Пример использования и тестирования
+# Example usage and testing
 bank = Bank()
 
 vasya = Person('USD', 10)
 petya = Person('EUR', 5)
 
-# Если валюта не задана, то конвертация происходит в BYN:
+# Testing conversion to default currency 'BYN'
 assert (bank.exchange_currency(vasya.currency, vasya.amount)
-        == (32.69, "BYN")), "Ошибка в конвертации из USD в BYN"
+        == (32.69, "BYN")), "Error converting from USD to BYN"
 assert (bank.exchange_currency(petya.currency, petya.amount)
-        == (17.6, "BYN")), "Ошибка в конвертации из EUR в BYN"
+        == (17.6, "BYN")), "Error converting from EUR to BYN"
 
-# Конвертация в заданную валюту:
+# Testing conversion to specified currency
 assert (bank.exchange_currency(vasya.currency, vasya.amount, 'EUR')
-        == (9.29, "EUR")), "Ошибка в конвертации из USD в EUR"
+        == (9.29, "EUR")), "Error converting from USD to EUR"
 assert (bank.exchange_currency(petya.currency, petya.amount, 'USD')
-        == (5.38, "USD")), "Ошибка в конвертации из EUR в USD"
+        == (5.38, "USD")), "Error converting from EUR to USD"

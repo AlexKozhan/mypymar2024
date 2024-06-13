@@ -7,31 +7,25 @@ import random
 
 
 class Card:
-    """Represents a single playing card.
-    """
+    """Represents a single playing card."""
     number_list = ['2', '3', '4', '5', '6',
                    '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
     mast_list = ['Hearts', 'Spades', 'Diamonds', 'Clubs']
 
     def __init__(self, number, mast):
-        """Initializes a Card  with a number
-        and a mast (suit).
-        """
+        """Initializes a Card with a number and a mast (suit)."""
         self.number = number
         self.mast = mast
 
     def __str__(self):
-        """Returns a string representation of the card.
-        """
+        """Returns a string representation of the card."""
         return f'{self.mast} {self.number}'
 
 
 class CardsDeck:
-    """Represents a deck of playing cards including two jokers.
-    """
+    """Represents a deck of playing cards including two jokers."""
     def __init__(self):
-        """Initializes a CardsDeck including jokers.
-        """
+        """Initializes a CardsDeck including jokers."""
         self.cards = []
         for mast in Card.mast_list:
             for number in Card.number_list:
@@ -44,12 +38,10 @@ class CardsDeck:
         random.shuffle(self.cards)
 
     def get(self, index):
-        """Returns the card at the specified index.
-        """
+        """Returns the card at the specified index."""
         if 0 <= index < len(self.cards):
             return self.cards[index]
-        else:
-            return False
+        return False
 
 
 deck = CardsDeck()

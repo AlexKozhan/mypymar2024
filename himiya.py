@@ -26,20 +26,21 @@ class Himiya:
     A class to parse a chemical formula
     and count the number of each type of atom.
     """
-    def countOfAtoms(self, formula: str) -> dict:
+
+    def count_of_atoms(self, formula: str) -> dict:
         """
         Parse the given chemical formula and
         return a dictionary with the count of
         each type of atom.
         """
-        stk = []  # Stack to hold dictionaries of atom counts at different levels of nesting
-        cur = defaultdict(int)  # Current dictionary of atom counts
+        stack = []  # Stack to hold dictionaries of atom counts at different levels of nesting
+        current = defaultdict(int)  # Current dictionary of atom counts
 
         i = 0  # Index to iterate over the formula
         while i < len(formula):
             if formula[i] in '([{':  # If opening bracket, push current dictionary to stack and start a new one
-                stk.append(copy.deepcopy(cur))
-                cur.clear()
+                stack.append(copy.deepcopy(current))
+                current.clear()
                 i += 1
 
             elif formula[i] in ')]}':  # If closing bracket, process the nested formula
@@ -48,15 +49,15 @@ class Himiya:
                     j += 1
 
                 # Multiplier for the nested formula
-                num = 1 if j == i + 1 else int(formula[i+1:j])
-                for k in cur.keys():
-                    cur[k] *= num
+                num = 1 if j == i + 1 else int(formula[i + 1:j])
+                for key in current.keys():
+                    current[key] *= num
 
                 # Merge current dictionary with the top dictionary from the stack
-                for k, v in cur.items():
-                    stk[-1][k] += v
+                for key, value in current.items():
+                    stack[-1][key] += value
 
-                cur = stk.pop(-1)  # Pop the top dictionary from the stack
+                current = stack.pop(-1)  # Pop the top dictionary from the stack
                 i = j
 
             else:
@@ -71,25 +72,27 @@ class Himiya:
                     while k < len(formula) and formula[k].isdigit():
                         k += 1
                     num = 1 if j == k else int(formula[j:k])  # Extract the count
-                    cur[atom] += num  # Add the atom count to the current dictionary
+                    current[atom] += num  # Add the atom count to the current dictionary
                     i = k
 
         # Merge any remaining dictionaries in the stack
-        while stk:
-            top = stk.pop()
-            for k, v in cur.items():
-                top[k] += v
-            cur = top
+        while stack:
+            top = stack.pop()
+            for key, value in current.items():
+                top[key] += value
+            current = top
 
-        return dict(sorted(cur.items()))
+        return dict(sorted(current.items()))
 
 
 solution = Himiya()
 
-
-assert solution.countOfAtoms("H2O") == {'H': 2, 'O': 1}, \
-    f"Error: {solution.countOfAtoms('H2O')}"
-assert solution.countOfAtoms("Mg(OH)2") == {'Mg': 1, 'O': 2, 'H': 2}, \
-    f"Error: {solution.countOfAtoms('Mg(OH)2')}"
-assert solution.countOfAtoms("K4[ON(SO3)2]2") == {'K': 4, 'O': 14, 'N': 2, 'S': 4}, \
-    f"Error: {solution.countOfAtoms('K4[ON(SO3)2]2')}"
+assert solution.count_of_atoms("H2O") == {'H': 2, 'O': 1}, (
+    f"Error: {solution.count_of_atoms('H2O')}"
+)
+assert solution.count_of_atoms("Mg(OH)2") == {'Mg': 1, 'O': 2, 'H': 2}, (
+    f"Error: {solution.count_of_atoms('Mg(OH)2')}"
+)
+assert solution.count_of_atoms("K4[ON(SO3)2]2") == {'K': 4, 'O': 14, 'N': 2, 'S': 4}, (
+    f"Error: {solution.count_of_atoms('K4[ON(SO3)2]2')}"
+)
