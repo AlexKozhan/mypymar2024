@@ -49,8 +49,8 @@ class Bank:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        converted_amount = (self.currency_converter.convert
-                            (from_currency, to_currency, amount))
+        converted_amount = self.currency_converter.convert(
+            from_currency, to_currency, amount)
         return converted_amount, to_currency
 
 
@@ -67,8 +67,7 @@ class Currency:
             'BYN': {'USD': 0.306, 'EUR': 0.284}
         }
 
-    def convert(self, from_currency: str, to_currency:
-    str, amount: float) -> float:
+    def convert(self, from_currency: str, to_currency: str, amount: float) -> float:
         """
         Converts the specified amount from one currency to another.
 
@@ -83,13 +82,14 @@ class Currency:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        if from_currency not in self.rates or to_currency not in self.rates[from_currency]:
+        if (from_currency not in self.rates or
+                to_currency not in self.rates[from_currency]):
             raise ValueError("Invalid currency codes")
 
         rate = self.rates[from_currency][to_currency]
         return round(amount * rate, 2)
 
-    def get_supported_currencies(self):
+    def get_supported_currencies(self) -> list:
         """
         Returns a list of all supported currency codes.
 
@@ -98,7 +98,8 @@ class Currency:
         """
         return list(self.rates.keys())
 
-    def update_exchange_rate(self, from_currency: str, to_currency: str, new_rate: float):
+    def update_exchange_rate(self, from_currency: str,
+                             to_currency: str, new_rate: float):
         """
         Updates the exchange rate between two currencies.
 
@@ -174,7 +175,7 @@ class Person:
             raise ValueError("Withdrawal amount exceeds current amount")
         self.amount -= withdrawal_amount
 
-    def check_balance(self):
+    def check_balance(self) -> float:
         """
         Returns the current amount balance.
         """
@@ -195,10 +196,10 @@ if __name__ == "__main__":
             == (17.6, "BYN")), "Error converting from EUR to BYN"
 
     # Testing conversion to specified currency
-    assert bank.exchange_currency(vasya.currency, vasya.amount, 'EUR') == (
-    9.29, "EUR"), "Error converting from USD to EUR"
-    assert bank.exchange_currency(petya.currency, petya.amount, 'USD') == (
-    5.38, "USD"), "Error converting from EUR to USD"
+    assert (bank.exchange_currency(vasya.currency, vasya.amount, 'EUR')
+            == (9.29, "EUR")), "Error converting from USD to EUR"
+    assert (bank.exchange_currency(petya.currency, petya.amount, 'USD')
+            == (5.38, "USD")), "Error converting from EUR to USD"
 
     # Testing Person class methods
     vasya.add_amount(20)
@@ -207,11 +208,12 @@ if __name__ == "__main__":
     petya.withdraw_amount(3)
     assert petya.check_balance() == 2, "Error in withdrawing amount from petya"
 
-    currency = Currency()
-    currency.update_exchange_rate('USD', 'EUR', 0.93)
-    assert (currency.convert('USD', 'EUR', 10)
+    # Testing Currency class methods
+    currency_converter = Currency()
+    currency_converter.update_exchange_rate('USD', 'EUR', 0.93)
+    assert (currency_converter.convert('USD', 'EUR', 10)
             == 9.3), "Error in updating exchange rate"
 
-    currency.add_currency('GBP', {'USD': 1.25, 'EUR': 1.15})
-    assert (currency.convert('GBP', 'USD', 10)
+    currency_converter.add_currency('GBP', {'USD': 1.25, 'EUR': 1.15})
+    assert (currency_converter.convert('GBP', 'USD', 10)
             == 12.5), "Error in adding new currency"
