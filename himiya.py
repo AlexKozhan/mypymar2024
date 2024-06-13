@@ -27,6 +27,9 @@ class Himiya:
     and count the number of each type of atom.
     """
 
+    def __init__(self):
+        pass
+
     def count_of_atoms(self, formula: str) -> dict:
         """
         Parse the given chemical formula and
@@ -84,15 +87,52 @@ class Himiya:
 
         return dict(sorted(current.items()))
 
+    def get_sorted_atom_counts(self, formula: str) -> dict:
+        """
+        Returns a dictionary with sorted counts of each type of atom
+        in the given chemical formula.
+        """
+        atom_counts = self.count_of_atoms(formula)
+        return dict(sorted(atom_counts.items()))
 
-solution = Himiya()
+    def validate_formula(self, formula: str) -> bool:
+        """
+        Validates if the given formula is a valid chemical formula.
+        """
+        # Implement validation logic here (example: check for balanced parentheses)
+        # For simplicity, assuming parentheses are always balanced in this case
+        return True  # Placeholder for validation logic
 
-assert solution.count_of_atoms("H2O") == {'H': 2, 'O': 1}, (
-    f"Error: {solution.count_of_atoms('H2O')}"
-)
-assert solution.count_of_atoms("Mg(OH)2") == {'Mg': 1, 'O': 2, 'H': 2}, (
-    f"Error: {solution.count_of_atoms('Mg(OH)2')}"
-)
-assert solution.count_of_atoms("K4[ON(SO3)2]2") == {'K': 4, 'O': 14, 'N': 2, 'S': 4}, (
-    f"Error: {solution.count_of_atoms('K4[ON(SO3)2]2')}"
-)
+    def get_supported_elements(self) -> list:
+        """
+        Returns a list of supported element symbols.
+        """
+        # Placeholder for actual supported elements
+        return ['H', 'He', 'Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne']
+
+
+if __name__ == "__main__":
+    solution = Himiya()
+
+    assert solution.count_of_atoms("H2O") == {'H': 2, 'O': 1}, (
+        f"Error: {solution.count_of_atoms('H2O')}"
+    )
+    assert solution.count_of_atoms("Mg(OH)2") == {'Mg': 1, 'O': 2, 'H': 2}, (
+        f"Error: {solution.count_of_atoms('Mg(OH)2')}"
+    )
+    assert solution.count_of_atoms("K4[ON(SO3)2]2") == {'K': 4, 'O': 14, 'N': 2, 'S': 4}, (
+        f"Error: {solution.count_of_atoms('K4[ON(SO3)2]2')}"
+    )
+
+    # Additional method usage example:
+    sorted_counts = solution.get_sorted_atom_counts("K4[ON(SO3)2]2")
+    print("Sorted Atom Counts:", sorted_counts)
+
+    # Validation example:
+    formula_to_validate = "H2O"
+    is_valid = solution.validate_formula(formula_to_validate)
+    print(f"Is '{formula_to_validate}' a valid formula?: {is_valid}")
+
+    # Supported elements example:
+    supported_elements = solution.get_supported_elements()
+    print("Supported Elements:", supported_elements)

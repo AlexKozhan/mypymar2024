@@ -39,8 +39,8 @@ class Bank:
         Args:
             from_currency (str): The currency code to convert from.
             amount (float): The amount to convert.
-            to_currency (str, optional): The currency code
-            to convert to. Defaults to 'BYN'.
+            to_currency (str, optional): The currency code to
+            convert to. Defaults to 'BYN'.
 
         Returns:
             tuple: A tuple containing the converted amount and the currency code.
@@ -48,8 +48,8 @@ class Bank:
         Raises:
             ValueError: If invalid currency codes are provided.
         """
-        converted_amount = (
-            self.currency_converter.convert(from_currency, to_currency, amount))
+        converted_amount = (self.currency_converter.convert
+                            (from_currency, to_currency, amount))
         return (converted_amount, to_currency)
 
 
@@ -92,6 +92,28 @@ class Currency:
 
         return round(amount * rate, 2)
 
+    def get_exchange_rate(self, from_currency: str, to_currency: str) -> float:
+        """
+        Retrieves the exchange rate from one currency to another.
+
+        Args:
+            from_currency (str): The currency code to convert from.
+            to_currency (str): The currency code to convert to.
+
+        Returns:
+            float: The exchange rate.
+
+        Raises:
+            ValueError: If invalid currency codes are provided.
+        """
+        if from_currency not in self.rates:
+            raise ValueError("Invalid from_currency code")
+
+        if to_currency not in self.rates[from_currency]:
+            raise ValueError("Invalid to_currency code")
+
+        return self.rates[from_currency][to_currency]
+
 
 class Person:
     """
@@ -109,21 +131,33 @@ class Person:
         self.currency = currency
         self.amount = amount
 
+    def add_amount(self, additional_amount: float):
+        """
+        Adds the specified amount to the current amount.
+
+        Args:
+            additional_amount (float): The amount to add.
+        """
+        self.amount += additional_amount
+
 
 # Example usage and testing
-bank = Bank()
+if __name__ == "__main__":
+    bank = Bank()
 
-vasya = Person('USD', 10)
-petya = Person('EUR', 5)
+    vasya = Person('USD', 10)
+    petya = Person('EUR', 5)
 
-# Testing conversion to default currency 'BYN'
-assert (bank.exchange_currency(vasya.currency, vasya.amount)
-        == (32.69, "BYN")), "Error converting from USD to BYN"
-assert (bank.exchange_currency(petya.currency, petya.amount)
-        == (17.6, "BYN")), "Error converting from EUR to BYN"
+    # Testing conversion to default currency 'BYN'
+    assert (bank.exchange_currency(vasya.currency, vasya.amount)
+            == (32.69, "BYN")), "Error converting from USD to BYN"
+    assert (bank.exchange_currency(petya.currency, petya.amount)
+            == (17.6, "BYN")), "Error converting from EUR to BYN"
 
-# Testing conversion to specified currency
-assert (bank.exchange_currency(vasya.currency, vasya.amount, 'EUR')
-        == (9.29, "EUR")), "Error converting from USD to EUR"
-assert (bank.exchange_currency(petya.currency, petya.amount, 'USD')
-        == (5.38, "USD")), "Error converting from EUR to USD"
+    # Testing conversion to specified currency
+    assert (bank.exchange_currency(vasya.currency,
+                                  vasya.amount, 'EUR')
+            == (9.29, "EUR")), "Error converting from USD to EUR"
+    assert (bank.exchange_currency(petya.currency,
+                                  petya.amount, 'USD')
+            == (5.38, "USD")), "Error converting from EUR to USD"
