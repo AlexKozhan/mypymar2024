@@ -13,7 +13,6 @@
 
 
 import re
-import sys
 
 
 def calculate_expression(expression):

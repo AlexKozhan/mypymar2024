@@ -68,7 +68,8 @@ def read_and_print_statistics(file_name):
                 file.write(f"Total number of students: {total_students}\n")
                 for group, count in group_counts.items():
                     average_grade = group_sums[group] / count
-                    file.write(f"Number of students in Group {group}: {count}\n")
+                    file.write(f"Number of students in Group {group}: "
+                               f"{count}\n")
                     file.write(f"Average grade for Group {group}: "
                                f"{average_grade:.2f}\n")
 
