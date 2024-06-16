@@ -49,9 +49,7 @@ class CardsDeck:
 
     def get(self, index):
         """Returns the card at the specified index."""
-        if 0 <= index < len(self.cards):
-            return self.cards[index]
-        return False
+        return self.cards[index]
 
 
 deck = CardsDeck()
@@ -59,8 +57,8 @@ deck.shuffle()
 
 while True:
     card_number = int(input('Choose a card from the 54-card deck (0-53): '))
-    card = deck.get(card_number)
-    if card:
+    if 0 <= card_number < len(deck.cards):
+        card = deck.get(card_number)
         print(f'Your card is: {card}')
         print(f'Card value: {card.get_value()}')
     else:
