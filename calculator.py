@@ -5,23 +5,41 @@ from collections import deque
 def tokenize(expression):
     """
     Tokenizes a mathematical expression string into tokens.
+
+    Args:
+    expression (str): The mathematical expression to tokenize.
+
+    Returns:
+    deque: A deque containing tokens extracted from the expression.
     """
-    tokens = re.findall(r'\d+\.\d+|\d+|\*\*|[+\-*/()]',
-                        expression)
-    return deque(tokens)
+    return deque(re.findall(r'\d+\.\d+|\d+|\*\*|[+\-*/()]', expression))
 
 
 def parse_expression(tokens):
     """
-    Parses a mathematical expression represented
-    by tokens,
+    Parses a mathematical expression represented by tokens,
     respecting operator precedence.
+
+    Args:
+    tokens (deque): Tokens representing the mathematical expression.
+
+    Returns:
+    float: The result of evaluating the expression.
+
+    Raises:
+    ValueError: If a token cannot be converted to float.
+    ZeroDivisionError: If division by zero is encountered.
     """
 
     def parse_term(tokens):
         """
-        Parses terms (multiplication, division, floor
-        division) in the expression.
+        Parses terms (multiplication, division, floor division) in the expression.
+
+        Args:
+        tokens (deque): Tokens representing the mathematical expression.
+
+        Returns:
+        float: The result of evaluating the term.
         """
         term = parse_factor(tokens)
         while tokens and tokens[0] in ('*', '/', '//'):
@@ -31,19 +49,23 @@ def parse_expression(tokens):
                 term *= right
             elif op == '/':
                 if right == 0:
-                    raise ZeroDivisionError("Error: division "
-                                            "by zero")
+                    raise ZeroDivisionError("Error: division by zero")
                 term /= right
             elif op == '//':
                 if right == 0:
-                    raise ZeroDivisionError("Error: division "
-                                            "by zero")
+                    raise ZeroDivisionError("Error: division by zero")
                 term //= right
         return term
 
     def parse_factor(tokens):
         """
         Parses factors (exponentiation) in the expression.
+
+        Args:
+        tokens (deque): Tokens representing the mathematical expression.
+
+        Returns:
+        float: The result of evaluating the factor.
         """
         factor = parse_primary(tokens)
         while tokens and tokens[0] == '**':
@@ -54,20 +76,26 @@ def parse_expression(tokens):
 
     def parse_primary(tokens):
         """
-        Parses primary expressions (numbers or
-        sub-expressions in parentheses).
+        Parses primary expressions (numbers or sub-expressions in parentheses).
+
+        Args:
+        tokens (deque): Tokens representing the mathematical expression.
+
+        Returns:
+        float: The result of evaluating the primary expression.
+
+        Raises:
+        ValueError: If a token inside the primary expression cannot be converted to float.
         """
         token = tokens.popleft()
         if token == '(':
             expr = parse_expression(tokens)
             tokens.popleft()  # Remove the closing parenthesis ')'
             return expr
-        else:
-            try:
-                return float(token)
-            except ValueError:
-                raise ValueError(f"Error: could not convert "
-                                 f"token '{token}' to float")
+        try:
+            return float(token)
+        except ValueError:
+            raise ValueError(f"Error: could not convert token '{token}' to float") from None
 
     term = parse_term(tokens)
     while tokens and tokens[0] in ('+', '-'):
@@ -82,8 +110,17 @@ def parse_expression(tokens):
 
 def calculate_expression(expression):
     """
-    Evaluates a mathematical expression provided
-    as a string.
+    Evaluates a mathematical expression provided as a string.
+
+    Args:
+    expression (str): The mathematical expression to evaluate.
+
+    Returns:
+    float: The result of evaluating the expression.
+
+    Raises:
+    ValueError: If the expression contains invalid characters or tokens.
+    ZeroDivisionError: If division by zero is encountered.
     """
     if not re.match(r'^[0-9+\-*/.()//** ]*$', expression):
         raise ValueError("Error: invalid characters in expression")
@@ -93,21 +130,19 @@ def calculate_expression(expression):
         result = parse_expression(tokens)
         return result
     except ZeroDivisionError as zde:
-        raise ZeroDivisionError(f"Error: {zde}")
+        raise ZeroDivisionError(f"Error: {zde}") from zde
     except ValueError as ve:
-        raise ValueError(f"Error: {ve}")
+        raise ValueError(f"Error: {ve}") from ve
     except Exception as e:
-        raise ValueError(f"Error: {e}")
+        raise ValueError(f"Error: {e}") from e
 
 
 def main():
     """
-    Main function of the program. Prompts the
-    user for a mathematical expression
+    Main function of the program. Prompts the user for a mathematical expression
     and prints the result of its evaluation.
     """
-    print("Enter a mathematical expression "
-          "(e.g., '10 - 3 + 18'): ")
+    print("Enter a mathematical expression (e.g., '10 - 3 + 18'): ")
     user_input = input("~ ")
 
     try:
