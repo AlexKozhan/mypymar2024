@@ -1,67 +1,113 @@
-"""Напишите программу - инженерный калькулятор.
-Передусмотрите возможные ошибки и обработайте их.
- ~ - это предложение ввода.
-
-Базовые требования:
-
-Программа считает простые математические выражения:
-~ 5 + 4 9
-
-Программа ожидает от пользователя ввода
-математического выражения и правильно его трактует:
-~ 10 - 3 + 1 8 ~ 2 ** 3 - 1 7"""
-
-
 import re
+from collections import deque
+
+
+def tokenize(expression):
+    """
+    Tokenizes a mathematical expression string into tokens.
+    """
+    tokens = re.findall(r'\d+\.\d+|\d+|\*\*|[+\-*/()]',
+                        expression)
+    return deque(tokens)
+
+
+def parse_expression(tokens):
+    """
+    Parses a mathematical expression represented
+    by tokens,
+    respecting operator precedence.
+    """
+
+    def parse_term(tokens):
+        """
+        Parses terms (multiplication, division, floor
+        division) in the expression.
+        """
+        term = parse_factor(tokens)
+        while tokens and tokens[0] in ('*', '/', '//'):
+            op = tokens.popleft()
+            right = parse_factor(tokens)
+            if op == '*':
+                term *= right
+            elif op == '/':
+                if right == 0:
+                    raise ZeroDivisionError("Error: division "
+                                            "by zero")
+                term /= right
+            elif op == '//':
+                if right == 0:
+                    raise ZeroDivisionError("Error: division "
+                                            "by zero")
+                term //= right
+        return term
+
+    def parse_factor(tokens):
+        """
+        Parses factors (exponentiation) in the expression.
+        """
+        factor = parse_primary(tokens)
+        while tokens and tokens[0] == '**':
+            tokens.popleft()
+            exponent = parse_primary(tokens)
+            factor **= exponent
+        return factor
+
+    def parse_primary(tokens):
+        """
+        Parses primary expressions (numbers or
+        sub-expressions in parentheses).
+        """
+        token = tokens.popleft()
+        if token == '(':
+            expr = parse_expression(tokens)
+            tokens.popleft()  # Remove the closing parenthesis ')'
+            return expr
+        else:
+            try:
+                return float(token)
+            except ValueError:
+                raise ValueError(f"Error: could not convert "
+                                 f"token '{token}' to float")
+
+    term = parse_term(tokens)
+    while tokens and tokens[0] in ('+', '-'):
+        op = tokens.popleft()
+        right = parse_term(tokens)
+        if op == '+':
+            term += right
+        elif op == '-':
+            term -= right
+    return term
 
 
 def calculate_expression(expression):
     """
-    Evaluates a mathematical expression given as a string.
-    Returns:
-    float: The result of the expression evaluation.
-    Raises:
-    ValueError: If the expression contains invalid characters.
-    ZeroDivisionError: If the expression involves division by zero.
+    Evaluates a mathematical expression provided
+    as a string.
     """
-    tokens = re.findall(r'[+-]?\d*\.\d+|\d+|[+\-*///**]', expression)
+    if not re.match(r'^[0-9+\-*/.()//** ]*$', expression):
+        raise ValueError("Error: invalid characters in expression")
 
-    result = float(tokens[0])
-
-    i = 1
-    while i < len(tokens):
-        operator = tokens[i]
-        i += 1
-        if operator == '+':
-            result += float(tokens[i])
-        elif operator == '-':
-            result -= float(tokens[i])
-        elif operator == '*':
-            result *= float(tokens[i])
-        elif operator == '/':
-            if float(tokens[i]) == 0:
-                raise ZeroDivisionError("Error: division by zero")
-            result /= float(tokens[i])
-        elif operator == '//':
-            if float(tokens[i]) == 0:
-                raise ZeroDivisionError("Error: division by zero")
-            result //= float(tokens[i])
-        elif operator == '**':
-            result **= float(tokens[i])
-        else:
-            raise ValueError("Error: invalid operator")
-        i += 1
-
-    return result
+    try:
+        tokens = tokenize(expression)
+        result = parse_expression(tokens)
+        return result
+    except ZeroDivisionError as zde:
+        raise ZeroDivisionError(f"Error: {zde}")
+    except ValueError as ve:
+        raise ValueError(f"Error: {ve}")
+    except Exception as e:
+        raise ValueError(f"Error: {e}")
 
 
 def main():
     """
-    Main function of the program. Prompts the user for a
-    mathematical expression and prints the result of its
-    evaluation.
+    Main function of the program. Prompts the
+    user for a mathematical expression
+    and prints the result of its evaluation.
     """
-    print("Enter a mathematical expression (e.g., '10 - 3 + 18'): ")
+    print("Enter a mathematical expression "
+          "(e.g., '10 - 3 + 18'): ")
     user_input = input("~ ")
 
     try:
