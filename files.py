@@ -63,15 +63,16 @@ def read_and_print_statistics(file_name):
                 print(f"Average grade for Group {group}: {average_grade:.2f}")
 
             # Append statistics to the file
-            with open(file_name, 'a', encoding='utf-8') as file:
-                file.write("\nStatistics:\n")
-                file.write(f"Total number of students: {total_students}\n")
-                for group, count in group_counts.items():
-                    average_grade = group_sums[group] / count
-                    file.write(f"Number of students in Group {group}: "
-                               f"{count}\n")
-                    file.write(f"Average grade for Group {group}: "
-                               f"{average_grade:.2f}\n")
+        # Append statistics to the file
+        with open(file_name, 'a', encoding='utf-8') as file:
+            file.write("\nStatistics:\n")
+            file.write(f"Total number of students: {total_students}\n")
+            for group, count in group_counts.items():
+                average_grade = group_sums[group] / count
+                file.write(f"Number of students in Group {group}: "
+                           f"{count}\n")
+                file.write(f"Average grade for Group {group}: "
+                           f"{average_grade:.2f}\n")
 
     except IOError as e:
         print(f"Error reading from {file_name}: {e}")
