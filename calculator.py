@@ -30,82 +30,81 @@ def parse_expression(tokens):
     ValueError: If a token cannot be converted to float.
     ZeroDivisionError: If division by zero is encountered.
     """
-
-    def parse_term(tokens):
-        """
-        Parses terms (multiplication, division, floor division) in the expression.
-
-        Args:
-        tokens (deque): Tokens representing the mathematical expression.
-
-        Returns:
-        float: The result of evaluating the term.
-        """
-        term = parse_factor(tokens)
-        while tokens and tokens[0] in ('*', '/', '//'):
-            op = tokens.popleft()
-            right = parse_factor(tokens)
-            if op == '*':
-                term *= right
-            elif op == '/':
-                if right == 0:
-                    raise ZeroDivisionError("Error: division by zero")
-                term /= right
-            elif op == '//':
-                if right == 0:
-                    raise ZeroDivisionError("Error: division by zero")
-                term //= right
-        return term
-
-    def parse_factor(tokens):
-        """
-        Parses factors (exponentiation) in the expression.
-
-        Args:
-        tokens (deque): Tokens representing the mathematical expression.
-
-        Returns:
-        float: The result of evaluating the factor.
-        """
-        factor = parse_primary(tokens)
-        while tokens and tokens[0] == '**':
-            tokens.popleft()
-            exponent = parse_primary(tokens)
-            factor **= exponent
-        return factor
-
-    def parse_primary(tokens):
-        """
-        Parses primary expressions (numbers or sub-expressions in parentheses).
-
-        Args:
-        tokens (deque): Tokens representing the mathematical expression.
-
-        Returns:
-        float: The result of evaluating the primary expression.
-
-        Raises:
-        ValueError: If a token inside the primary expression cannot be converted to float.
-        """
-        token = tokens.popleft()
-        if token == '(':
-            expr = parse_expression(tokens)
-            tokens.popleft()  # Remove the closing parenthesis ')'
-            return expr
-        try:
-            return float(token)
-        except ValueError:
-            raise ValueError(f"Error: could not convert token '{token}' to float") from None
-
     term = parse_term(tokens)
     while tokens and tokens[0] in ('+', '-'):
         op = tokens.popleft()
         right = parse_term(tokens)
-        if op == '+':
-            term += right
-        elif op == '-':
-            term -= right
+        term = term + right if op == '+' else term - right
     return term
+
+
+def parse_term(tokens):
+    """
+    Parses terms (multiplication, division, floor division) in the expression.
+
+    Args:
+    tokens (deque): Tokens representing the mathematical expression.
+
+    Returns:
+    float: The result of evaluating the term.
+    """
+    term = parse_factor(tokens)
+    while tokens and tokens[0] in ('*', '/', '//'):
+        op = tokens.popleft()
+        right = parse_factor(tokens)
+        if op == '*':
+            term *= right
+        elif op == '/':
+            if right == 0:
+                raise ZeroDivisionError("Error: division by zero")
+            term /= right
+        elif op == '//':
+            if right == 0:
+                raise ZeroDivisionError("Error: division by zero")
+            term //= right
+    return term
+
+
+def parse_factor(tokens):
+    """
+    Parses factors (exponentiation) in the expression.
+
+    Args:
+    tokens (deque): Tokens representing the mathematical expression.
+
+    Returns:
+    float: The result of evaluating the factor.
+    """
+    factor = parse_primary(tokens)
+    while tokens and tokens[0] == '**':
+        tokens.popleft()
+        exponent = parse_primary(tokens)
+        factor **= exponent
+    return factor
+
+
+def parse_primary(tokens):
+    """
+    Parses primary expressions (numbers or sub-expressions in parentheses).
+
+    Args:
+    tokens (deque): Tokens representing the mathematical expression.
+
+    Returns:
+    float: The result of evaluating the primary expression.
+
+    Raises:
+    ValueError: If a token inside the primary expression cannot be converted to float.
+    """
+    token = tokens.popleft()
+    if token == '(':
+        expr = parse_expression(tokens)
+        tokens.popleft()  # Remove the closing parenthesis ')'
+        return expr
+    try:
+        return float(token)
+    except ValueError:
+        raise ValueError(f"Error: could not convert token '{token}' to float") from None
 
 
 def calculate_expression(expression):
