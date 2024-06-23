@@ -1,3 +1,17 @@
+"""Напишите программу - инженерный калькулятор.
+Передусмотрите возможные ошибки и обработайте
+их. ~ - это предложение ввода.
+
+Базовые требования:
+
+Программа считает простые математические выражения:
+~ 5 + 4 9
+
+Программа ожидает от пользователя ввода
+математического выражения и правильно его трактует:
+~ 10 - 3 + 1 8 ~ 2 ** 3 - 1 7"""
+
+
 import re
 from collections import deque
 
@@ -94,7 +108,8 @@ def parse_primary(tokens):
     float: The result of evaluating the primary expression.
 
     Raises:
-    ValueError: If a token inside the primary expression cannot be converted to float.
+    ValueError: If a token inside the primary expression
+    cannot be converted to float.
     """
     token = tokens.popleft()
     if token == '(':
@@ -104,7 +119,8 @@ def parse_primary(tokens):
     try:
         return float(token)
     except ValueError:
-        raise ValueError(f"Error: could not convert token '{token}' to float") from None
+        raise ValueError(f"Error: could not convert "
+                         f"token '{token}' to float") from None
 
 
 def calculate_expression(expression):
@@ -138,7 +154,8 @@ def calculate_expression(expression):
 
 def main():
     """
-    Main function of the program. Prompts the user for a mathematical expression
+    Main function of the program. Prompts the
+    user for a mathematical expression
     and prints the result of its evaluation.
     """
     print("Enter a mathematical expression (e.g., '10 - 3 + 18'): ")
