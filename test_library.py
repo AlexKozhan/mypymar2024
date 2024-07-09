@@ -1,3 +1,8 @@
+"""
+Unit tests for the Book and User classes
+in the library_1 module.
+"""
+
 import unittest
 from library_1 import Book, User
 

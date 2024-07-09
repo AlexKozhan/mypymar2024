@@ -1,5 +1,10 @@
+"""
+Unit tests for the Bank class in deposit_2 module.
+"""
+
 import unittest
 from deposit_2 import Bank
+
 
 class TestBankDeposit(unittest.TestCase):
     """
@@ -29,6 +34,7 @@ class TestBankDeposit(unittest.TestCase):
         final_money_amount = self.bank.deposit(initial_money, duration)
 
         self.assertGreater(final_money_amount, initial_money)
+
 
 if __name__ == '__main__':
     unittest.main()
