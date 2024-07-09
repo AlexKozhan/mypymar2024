@@ -49,7 +49,8 @@ class Bank:
             raise ValueError("Duration must be a positive integer.")
 
         deposit_instance = Deposit()
-        final_money_result = deposit_instance.calculate_final_money(money, duration)
+        final_money_result = (deposit_instance.calculate_final_money
+                              (money, duration))
         return final_money_result
 
     def __str__(self):
