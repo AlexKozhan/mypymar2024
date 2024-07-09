@@ -1,33 +1,23 @@
-"""Ваша задача написать программу,
-принимающее число - номер кредитной карты
-(число может быть четным или не четным).
-И проверяющей может ли такая карта существовать.
-Предусмотреть защиту от ввода букв, пустой
-строки и т.д. Примечания Алгоритм Луна
+"""Вы получили в подарок на день рождения статуи
+разных размеров, каждая статуя имеет неотрицательный
+целочисленный размер. Поскольку Вам нравится доводить
+вещи до совершенства, то необходимо расположить их от
+меньшего к большему, чтобы каждая статуя была больше
+предыдущей ровно на 1. Для этого Вам могут понадобиться
+дополнительные статуи. Определите количество отсутствующих
+статуй.
 
-Примеры
-validate(4561261212345464) #=> False
-validate(4561261212345467) #=> True"""
+Пример Для статуй = [6, 2, 3, 8] результат должен быть = 3.
+Иными словами, у Вас отсутствуют статуи размеров 4, 5 и 7."""
 
-
-def validator(card_number):
-    """Cheking string for not being empty and with letters"""
-    if not isinstance(card_number, str) or not card_number.isdigit():
-        return False
-
-    reversed_list = [int(d) for d in card_number][::-1]
-    temp_sum = 0
-    for i, digit in enumerate(reversed_list):
-        if i % 2 == 1:
-            doubled = digit * 2
-            if doubled > 9:
-                doubled -= 9
-            temp_sum += doubled
-        else:
-            temp_sum += digit
-
-    return temp_sum % 10 == 0
-
-
-print(validator("4561261212345464"))
-print(validator("4561261212345467"))
+Statui_List = [6, 2, 3, 8]
+Min_Statuya = min(Statui_List)
+Max_Statuya = max(Statui_List)
+Missing_Statui = []
+"""Finding elements not in Statui_List"""
+for i in range(Min_Statuya, Max_Statuya + 1):
+    if i not in Statui_List:
+        Missing_Statui.append(i)
+print(f"Не хватает {len(Missing_Statui)} статуй")
+MISSING_STATUI_STRING = ', '.join(map(str, Missing_Statui))
+print(f"У вас отсутсвуют статуи размеров {MISSING_STATUI_STRING}")

@@ -1,59 +1,51 @@
-"""Дана последовательность целых чисел в виде массива.
- Определите, можно ли получить строго возрастающую последовательность,
-  удалив из массива не более одного элемента.
+"""В классическом варианте игра рассчитана
+на двух игроков. Каждый из игроков задумывает
+и записывает тайное 4-значное число с
+неповторяющимися цифрами. Игрок, который начинает
+игру по жребию, делает первую попытку отгадать число.
+Попытка — это 4-значное число с неповторяющимися цифрами,
+сообщаемое противнику. Противник сообщает в ответ, сколько
+цифр угадано без совпадения с их позициями в тайном числе
+(то есть количество коров) и сколько угадано вплоть до
+позиции в тайном числе (то есть количество быков).
+При игре против компьютера игрок вводит комбинации одну
+за другой, пока не отгадает всю последовательность.
+Ваша задача реализовать программу, против которой
+можно сыграть в "Быки и коровы"."""
 
-Примечание: последовательность a0, a1, ..., an считается строго возрастающей,
- если a0 < a1 < ... < an. Последовательность, содержащая только один элемент,
- также считается строго возрастающей.
+import random
 
-Примеры
-Для последовательности = [1, 3, 2, 1], вывод должен быть решение = False.
+# Пример
+# Загадано
+# 2310
+# Две коровы, один бык
+# 3219
+# Вы выиграли!
 
-В этом массиве нет ни одного элемента, который можно было бы удалить,
-чтобы получить строго возрастающую последовательность.
+Chislo_PK_List = random.sample('0123456789', 4)
+"""Generated list of 4 random unique numbers
+and changing type list to type string"""
+CHISLO_PK = ''.join(Chislo_PK_List)
+print("Загадано")
 
-Для последовательности = [1, 3, 2] вывод должен быть = True.
+while True:
+    chislo_igroka = input("Введи 4-значное число с неповторяющимися цифрами ")
+    """Checking input number to have 4 unique digits"""
+    if (len(chislo_igroka) != 4 or not chislo_igroka.isdigit()
+            or len(set(chislo_igroka)) != 4):
+        print('Вы ввели некорректное число, попробуйте еще раз')
+        continue
 
-Вы можете удалить 3 из массива, чтобы получить строго возрастающую
-последовательность [1, 2]. Альтернативно можно убрать 2, чтобы получить
-строго возрастающую последовательность [1, 3].
+    KOLVO_BYKI = 0
+    KOLVO_KOROVI = 0
+    """Cheking how many  KOLVO_BYKI and KOLVO_KOROVI we guessed right"""
+    for i in range(4):
+        if chislo_igroka[i] == CHISLO_PK[i]:
+            KOLVO_BYKI += 1
+        elif chislo_igroka[i] in CHISLO_PK:
+            KOLVO_KOROVI += 1
+    print(F"{KOLVO_KOROVI} коров(ы), {KOLVO_BYKI} бык(а)")
 
-solution([1, 2, 3])
-solution([1, 2, 1, 2])
-solution([1, 3, 2, 1])
-solution([1, 2, 3, 4, 5, 3, 5, 6])
-solution([40, 50, 60, 10, 20, 30])"""
-
-
-def is_increasing(massiv):
-    """Cheking if out list is not increasing"""
-    for i in range(1, len(massiv)):
-        if massiv[i] <= massiv[i - 1]:
-            return False
-    return True
-
-
-def strictly_increasing_without_one_element(massiv):
-    """If previous function works then we have increasing list"""
-    if is_increasing(massiv):
-        return True
-
-    for i in range(len(massiv)):
-        temp_massiv = massiv[:i] + massiv[i + 1:]
-        if is_increasing(temp_massiv):
-            return True
-
-    return False
-
-
-solution1 = [1, 2, 3]
-solution2 = [1, 2, 1, 2]
-solution3 = [1, 3, 2, 1]
-solution4 = [1, 2, 3, 4, 5, 3, 5, 6]
-solution5 = [40, 50, 60, 10, 20, 30]
-
-assert strictly_increasing_without_one_element(solution1)
-assert strictly_increasing_without_one_element(solution2)
-assert not strictly_increasing_without_one_element(solution3)
-assert strictly_increasing_without_one_element(solution4)
-assert not strictly_increasing_without_one_element(solution5)
+    if KOLVO_BYKI == 4:
+        print('Вы выиграли!')
+        break
