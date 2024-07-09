@@ -28,12 +28,13 @@ class TestBankDeposit(unittest.TestCase):
         """
         Test case to check handling of positive scenarios.
         """
-        initial_money = 125
-        duration = 7
+        initial_money = 1000
+        duration = 1
+        expected_amount = 1280.731560657122
 
         final_money_amount = self.bank.deposit(initial_money, duration)
 
-        self.assertGreater(final_money_amount, initial_money)
+        self.assertEqual(final_money_amount, expected_amount)
 
 
 if __name__ == '__main__':
