@@ -3,3 +3,6 @@ pycodestyle
 mypy
 ruff
 pylint
+pytest
+logging
+pytest-html
