@@ -75,7 +75,8 @@ class Book:
                     "by user %s.", self.title, user.name)
         if self.current_user is not None and self.current_user != user:
             logger.info("Book '%s' is already "
-                        "taken by user %s.", self.title, self.current_user.name)
+                        "taken by "
+                        "user %s.", self.title, self.current_user.name)
             return False
         self.current_user = user
         self.is_reserved = False
