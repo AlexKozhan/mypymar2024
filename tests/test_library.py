@@ -3,13 +3,9 @@ This module contains tests for the library system including the Book and User cl
 It uses pytest for testing and logging to capture log messages.
 """
 
-import logging
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../source')))
-
 import pytest
-from library import Book, User  # Adjust the import based on your project structure
+from library import Book, User
+import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
