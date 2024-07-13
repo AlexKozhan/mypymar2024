@@ -1,14 +1,14 @@
 """
 Test suite for the Bank class.
 """
-
+from bank import Bank
 import os
 import sys
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'source')))
+sys.path.insert(0, os.path.abspath
+(os.path.join(os.path.dirname(__file__), '..', 'source')))
 
-from bank import Bank
 
 @pytest.fixture
 def bank_instance():
@@ -16,6 +16,7 @@ def bank_instance():
     Fixture for creating a Bank instance.
     """
     return Bank()
+
 
 def test_deposit_positive(bank_instance):
     """
@@ -25,6 +26,7 @@ def test_deposit_positive(bank_instance):
     final_amount = bank_instance.deposit(125, 7)
     assert final_amount == pytest.approx(expected_amount, rel=1e-2)
 
+
 def test_deposit_zero_money(bank_instance):
     """
     Test that depositing zero money raises a ValueError.
@@ -32,6 +34,7 @@ def test_deposit_zero_money(bank_instance):
     with pytest.raises(ValueError, match="Initial money "
                                          "amount must be positive."):
         bank_instance.deposit(0, 7)
+
 
 def test_deposit_negative_duration(bank_instance):
     """

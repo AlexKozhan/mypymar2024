@@ -6,6 +6,7 @@ from library import Book, User
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 @pytest.fixture
 def setup_library():
     """
@@ -49,7 +50,8 @@ def test_reserve_already_reserved_book(setup_library, caplog):
     caplog.clear()
     with caplog.at_level(logging.INFO):
         assert user2.reserve_book(book1) is False
-    assert f"Book '{book1.title}' is already reserved by user {user1.name}." in caplog.text
+    assert (f"Book '{book1.title}' is already reserved "
+            f"by user {user1.name}.") in caplog.text
 
 
 def test_reserve_book_multiple_times(setup_library, caplog):
@@ -65,7 +67,8 @@ def test_reserve_book_multiple_times(setup_library, caplog):
     caplog.clear()
     with caplog.at_level(logging.INFO):
         assert user1.reserve_book(book1) is False
-    assert f"Book '{book1.title}' is already reserved by user {user1.name}." in caplog.text
+    assert (f"Book '{book1.title}' is already reserved "
+            f"by user {user1.name}.") in caplog.text
 
 
 def test_take_book(setup_library, caplog):
@@ -98,7 +101,8 @@ def test_take_reserved_book(setup_library, caplog):
     caplog.clear()
     with caplog.at_level(logging.INFO):
         assert user1.take_book(book1) is True
-    assert f"Book '{book1.title}' is taken by user {user1.name}." in caplog.text
+    assert (f"Book '{book1.title}' is taken "
+            f"by user {user1.name}.") in caplog.text
 
 
 def test_take_unreserved_book(setup_library, caplog):
@@ -113,7 +117,8 @@ def test_take_unreserved_book(setup_library, caplog):
     caplog.clear()
     with caplog.at_level(logging.INFO):
         assert user2.take_book(book1) is True
-    assert f"Book '{book1.title}' is taken by user {user2.name}." in caplog.text
+    assert (f"Book '{book1.title}' is taken by "
+            f"user {user2.name}.") in caplog.text
 
 
 def test_return_book(setup_library, caplog):
@@ -131,7 +136,8 @@ def test_return_book(setup_library, caplog):
     with caplog.at_level(logging.INFO):
         assert User.return_book(book1, user1) is True
     assert book1.current_user is None
-    assert f"Book '{book1.title}' is returned by user {user1.name}." in caplog.text
+    assert (f"Book '{book1.title}' is returned "
+            f"by user {user1.name}.") in caplog.text
 
 
 def test_return_book_by_another_user(setup_library, caplog):
@@ -149,7 +155,8 @@ def test_return_book_by_another_user(setup_library, caplog):
     with caplog.at_level(logging.INFO):
         returned_successfully = User.return_book(book1, user2)
     assert returned_successfully is False
-    assert (f"Book '{book1.title}' cannot be returned by user {user2.name} because it is "
+    assert (f"Book '{book1.title}' cannot be "
+            f"returned by user {user2.name} because it is "
             f"taken by {user1.name}.") in caplog.text
 
 
