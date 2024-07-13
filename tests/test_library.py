@@ -5,7 +5,7 @@ It uses pytest for testing and logging to capture log messages.
 
 import logging
 import pytest
-from library import Book, User
+from ..library import Book, User  # Adjust the import path based on your project structure
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
