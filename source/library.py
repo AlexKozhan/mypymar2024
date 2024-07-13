@@ -1,6 +1,8 @@
 """
-This module defines the Book and User classes for a simple library system.
-It includes methods to reserve, take, and return books, as well as basic logging for actions performed.
+This module defines the Book and User classes
+for a simple library system.
+It includes methods to reserve, take, and return
+books, as well as basic logging for actions performed.
 """
 
 import logging
@@ -18,8 +20,10 @@ class Book:
         author (str): The author of the book.
         pages (int): The number of pages in the book.
         isbn (str): The ISBN number of the book.
-        is_reserved (bool): Indicates whether the book is reserved.
-        current_user (User): The user who currently has the book.
+        is_reserved (bool): Indicates whether the
+        book is reserved.
+        current_user (User): The user who currently
+        has the book.
     """
     def __init__(self, title, author, pages, isbn):
         self.title = title
@@ -34,26 +38,26 @@ class Book:
         Reserve the book for a user.
 
         Args:
-            user (User): The user who wants
-            to reserve the book.
+            user (User): The user who wants to
+            reserve the book.
 
         Returns:
             bool: True if the reservation was
             successful, False otherwise.
         """
-        logger.info(f"Attempting to reserve "
-                    f"book '{self.title}' by user {user.name}.")
+        logger.info("Attempting to reserve "
+                    "book '%s' by user %s.",
+                    self.title, user.name)
         if self.is_reserved:
-            logger.info(f"Book '{self.title}' is "
-                        f"already reserved by "
-                        f"user {self.current_user.name}.")
+            logger.info("Book '%s' is already "
+                        "reserved by user %s.",
+                        self.title, self.current_user.name)
             return False
-        else:
-            self.is_reserved = True
-            self.current_user = user
-            logger.info(f"Book '{self.title}' is "
-                        f"reserved by user {user.name}.")
-            return True
+        self.is_reserved = True
+        self.current_user = user
+        logger.info("Book '%s' is reserved "
+                    "by user %s.", self.title, user.name)
+        return True
 
     def take(self, user):
         """
@@ -64,60 +68,60 @@ class Book:
             to take the book.
 
         Returns:
-            bool: True if the book was successfully
-            taken, False otherwise.
+            bool: True if the book was
+            successfully taken, False otherwise.
         """
-        logger.info(f"Attempting to take book '{self.title}' "
-                    f"by user {user.name}.")
-        if (self.current_user is not None
-                and self.current_user != user):
-            logger.info(f"Book '{self.title}' is "
-                        f"already taken by "
-                        f"user {self.current_user.name}.")
+        logger.info("Attempting to take "
+                    "book '%s' by user %s.",
+                    self.title, user.name)
+        if self.current_user is not None and self.current_user != user:
+            logger.info("Book '%s' is already "
+                        "taken by user %s.",
+                        self.title, self.current_user.name)
             return False
         elif self.is_reserved and self.current_user != user:
-            logger.info(f"Book '{self.title}' is already "
-                        f"reserved by "
-                        f"user {self.current_user.name}.")
+            logger.info("Book '%s' is already "
+                        "reserved by user %s.",
+                        self.title, self.current_user.name)
             return False
-        else:
-            self.current_user = user
-            self.is_reserved = False
-            logger.info(f"Book '{self.title}' is "
-                        f"taken by user {user.name}.")
-            return True
+        self.current_user = user
+        self.is_reserved = False
+        logger.info("Book '%s' is taken "
+                    "by user %s.", self.title, user.name)
+        return True
 
     def return_book(self, user):
         """
         Return the book by a user.
 
         Args:
-            user (User): The user who wants to
-            return the book.
+            user (User): The user who wants
+            to return the book.
 
         Returns:
-            bool: True if the book was successfully
-            returned, False otherwise.
+            bool: True if the book was
+            successfully returned, False otherwise.
         """
-        logger.info(f"Attempting to return book '{self.title}' "
-                    f"by user {user.name}.")
+        logger.info("Attempting to return "
+                    "book '%s' by user %s.",
+                    self.title, user.name)
         if self.current_user is None:
-            logger.info(f"Book '{self.title}' is "
-                        f"not taken by anyone.")
+            logger.info("Book '%s' is not "
+                        "taken by anyone.", self.title)
             return False
         elif self.current_user != user:
-            logger.info(f"Book '{self.title}' cannot "
-                        f"be returned by user {user.name} "
-                        f"because it is taken "
-                        f"by {self.current_user.name}.")
+            logger.info("Book '%s' cannot be "
+                        "returned by user %s because "
+                        "it is taken by %s.",
+                        self.title,
+                        user.name, self.current_user.name)
             return False
-        else:
-            logger.info(f"Book '{self.title}' is "
-                        f"returned by "
-                        f"user {self.current_user.name}.")
-            self.current_user = None
-            self.is_reserved = False
-            return True
+        logger.info("Book '%s' is returned "
+                    "by user %s.",
+                    self.title, self.current_user.name)
+        self.current_user = None
+        self.is_reserved = False
+        return True
 
 
 class User:
@@ -138,8 +142,8 @@ class User:
             book (Book): The book to be reserved.
 
         Returns:
-            bool: True if the reservation was
-            successful, False otherwise.
+            bool: True if the reservation
+            was successful, False otherwise.
         """
         return book.reserve(self)
 
@@ -151,8 +155,8 @@ class User:
             book (Book): The book to be taken.
 
         Returns:
-            bool: True if the book was successfully
-            taken, False otherwise.
+            bool: True if the book was
+            successfully taken, False otherwise.
         """
         return book.take(self)
 
@@ -163,8 +167,8 @@ class User:
 
         Args:
             book (Book): The book to be returned.
-            user (User): The user who is
-            returning the book.
+            user (User): The user who
+            is returning the book.
 
         Returns:
             bool: True if the book was
