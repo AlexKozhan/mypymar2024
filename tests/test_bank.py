@@ -30,14 +30,13 @@ def test_deposit(bank_instance, caplog):
     Args:
         bank_instance (fixture): Fixture to
         create a Bank instance.
-        caplog (LogCaptureFixture): Fixture to
-        capture log messages.
+        caplog (LogCaptureFixture): Fixture to c
+        apture log messages.
     """
     with caplog.at_level(logging.INFO):
         bank_instance.deposit(100)
     assert bank_instance.balance == 100
-    assert ("Deposited 100. New balance "
-            "is 100.") in caplog.text
+    assert "Deposited 100. New balance is 100." in caplog.text
 
 
 def test_withdraw(bank_instance, caplog):
@@ -45,10 +44,10 @@ def test_withdraw(bank_instance, caplog):
     Test withdrawing money from the bank account.
 
     Args:
-        bank_instance (fixture): Fixture
-        to create a Bank instance.
-        caplog (LogCaptureFixture): Fixture
-        to capture log messages.
+        bank_instance (fixture): Fixture to
+        create a Bank instance.
+        caplog (LogCaptureFixture): Fixture to
+         capture log messages.
     """
     bank_instance.deposit(200)
     caplog.clear()
@@ -60,11 +59,11 @@ def test_withdraw(bank_instance, caplog):
 
 def test_withdraw_insufficient_funds(bank_instance, caplog):
     """
-    Test withdrawing money when the balance is insufficient.
+    Test withdrawing money when the balance
+    is insufficient.
 
     Args:
-        bank_instance (fixture): Fixture to
-        create a Bank instance.
+        bank_instance (fixture): Fixture to create a Bank instance.
         caplog (LogCaptureFixture): Fixture
         to capture log messages.
     """
