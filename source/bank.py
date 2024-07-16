@@ -5,66 +5,44 @@
   капитализации - это означает, что проценты прибавляются
    к сумме вклада ежемесячно). Написать класс Bank,
    метод deposit принимает аргументы N и R, и
-   возвращает сумму, которая будет на счету пользователя."""
+   возвращает сумму, которая будет на счету
+   пользователя."""
 
 
-# source/bank.py
-class Deposit:
-    """
-    Represents a deposit.
-    """
-
-    @staticmethod
-    def calculate_final_money(money: float, duration: int,
-                              annual_rate: float = 0.25) -> float:
-        """
-        Calculates the total deposit amount taking
-        into account the monthly capitalization of interest.
-        """
-        n = 12  # Monthly capitalization
-        return money * (1 + annual_rate / n) ** (n * duration)
-
-    def __str__(self):
-        """
-        Returns information about the deposit.
-        """
-        return "This class represents a deposit."
+import logging
 
 
 class Bank:
-    """
-    Represents a bank.
-    """
-
     def __init__(self):
-        pass
+        self.balance = 0
+        self.logger = logging.getLogger(__name__)
 
-    def deposit(self, money: float, duration: int) -> float:
-        """
-        Accepts the deposit amount and term, returns the total
-        amount to the user's account.
-        """
+    def deposit(self, money: float):
         if money <= 0:
-            raise ValueError("Initial money amount must be positive.")
-        if duration <= 0:
-            raise ValueError("Duration must be a positive integer.")
+            raise ValueError("Deposit amount must be positive.")
+        self.balance += money
+        self.logger.info(f"Deposited {money}. New "
+                         f"balance is {self.balance}.")
 
-        deposit_instance = Deposit()
-        final_money_result = (deposit_instance.calculate_final_money
-                              (money, duration))
-        return final_money_result
-
-    def __str__(self):
-        """
-        Returns information about the bank.
-        """
-        return "This class represents a bank."
+    def withdraw(self, money: float):
+        if money <= 0:
+            raise ValueError("Withdrawal amount must "
+                             "be positive.")
+        if money > self.balance:
+            self.logger.error("Insufficient funds for "
+                              "withdrawal.")
+            raise ValueError("Insufficient funds for withdrawal.")
+        self.balance -= money
+        self.logger.info(f"Withdrew {money}. New balance "
+                         f"is {self.balance}.")
 
 
 INITIAL_MONEY = 125
 DURATION = 7
 
 bank = Bank()
-final_money_amount = bank.deposit(INITIAL_MONEY, DURATION)
-print(f"Сумма на счету пользователя "
-      f"через {DURATION} лет: {final_money_amount:.2f} рублей")
+bank.deposit(INITIAL_MONEY)
+
+final_money_amount = bank.balance
+print(f"Сумма на счету пользователя после "
+      f"внесения вклада: {final_money_amount:.2f} рублей")

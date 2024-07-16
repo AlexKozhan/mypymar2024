@@ -15,4 +15,4 @@ venv/
 
 # Pytest
 .pytest_cache/
-report.html
+
