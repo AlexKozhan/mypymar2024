@@ -34,8 +34,8 @@ class Bank:
             raise ValueError("Deposit amount must "
                              "be positive.")
         self.balance += money
-        self.logger.info(f"Deposited {money}. New "
-                         f"balance is {self.balance}.")
+        logging.info("Deposited %.2f. New balance "
+                     "is %.2f.", money, self.balance)
 
     def withdraw(self, money: float):
         """
@@ -53,8 +53,8 @@ class Bank:
             raise ValueError("Insufficient funds for "
                              "withdrawal.")
         self.balance -= money
-        self.logger.info(f"Withdrew {money}. New balance "
-                         f"is {self.balance}.")
+        logging.info("Withdrew %.2f. New balance "
+                     "is %.2f.", money, self.balance)
 
 
 INITIAL_MONEY = 125
