@@ -13,25 +13,45 @@ import logging
 
 
 class Bank:
+    """
+    Represents a bank.
+
+    This class provides methods to deposit and
+    withdraw money from the bank account.
+    """
     def __init__(self):
         self.balance = 0
         self.logger = logging.getLogger(__name__)
 
     def deposit(self, money: float):
+        """
+        Deposits money into the bank account.
+
+        Args:
+        money (float): Amount of money to deposit.
+        """
         if money <= 0:
-            raise ValueError("Deposit amount must be positive.")
+            raise ValueError("Deposit amount must "
+                             "be positive.")
         self.balance += money
         self.logger.info(f"Deposited {money}. New "
                          f"balance is {self.balance}.")
 
     def withdraw(self, money: float):
+        """
+            Withdraws money from the bank account.
+
+            Args:
+            money (float): Amount of money to withdraw.
+        """
         if money <= 0:
             raise ValueError("Withdrawal amount must "
                              "be positive.")
         if money > self.balance:
             self.logger.error("Insufficient funds for "
                               "withdrawal.")
-            raise ValueError("Insufficient funds for withdrawal.")
+            raise ValueError("Insufficient funds for "
+                             "withdrawal.")
         self.balance -= money
         self.logger.info(f"Withdrew {money}. New balance "
                          f"is {self.balance}.")
