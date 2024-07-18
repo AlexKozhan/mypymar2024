@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.3 on win32)" generated="2024-07-18T19:57:36.721533" rpa="false" schemaversion="5">
+<suite id="s1" name="Test2" source="C:\Users\Алексей\Desktop\test\deposit\test2.robot">
+<test id="s1-t1" name="Deposit Positive" line="5">
+<kw name="Test Deposit Positive" owner="test_deposit">
+<msg time="2024-07-18T19:57:36.747217" level="INFO">${result} = 250.99</msg>
+<var>${result}</var>
+<status status="PASS" start="2024-07-18T19:57:36.746216" elapsed="0.001001"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-18T19:57:36.747217" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result}</arg>
+<arg>250.99</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-18T19:57:36.747217" elapsed="0.000000"/>
+</kw>
+<tag>Positive</tag>
+<status status="PASS" start="2024-07-18T19:57:36.746216" elapsed="0.001001"/>
+</test>
+<test id="s1-t2" name="Deposit Zero Money" line="10">
+<kw name="Test Deposit Zero Money" owner="test_deposit">
+<msg time="2024-07-18T19:57:36.748216" level="INFO">${result} = 0.0</msg>
+<var>${result}</var>
+<status status="PASS" start="2024-07-18T19:57:36.748216" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-18T19:57:36.749216" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result}</arg>
+<arg>0.00</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-18T19:57:36.749216" elapsed="0.000000"/>
+</kw>
+<tag>Negative</tag>
+<status status="PASS" start="2024-07-18T19:57:36.748216" elapsed="0.001000"/>
+</test>
+<test id="s1-t3" name="Deposit Zero Duration" line="15">
+<kw name="Test Deposit Zero Duration" owner="test_deposit">
+<msg time="2024-07-18T19:57:36.750217" level="INFO">${result} = 125.0</msg>
+<var>${result}</var>
+<status status="PASS" start="2024-07-18T19:57:36.750217" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-18T19:57:36.751216" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result}</arg>
+<arg>125.00</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-18T19:57:36.750217" elapsed="0.000999"/>
+</kw>
+<tag>Negative</tag>
+<status status="PASS" start="2024-07-18T19:57:36.750217" elapsed="0.000999"/>
+</test>
+<test id="s1-t4" name="Deposit Negative Money" line="20">
+<kw name="Test Deposit Negative Money" owner="test_deposit">
+<msg time="2024-07-18T19:57:36.752217" level="INFO">${result} = -250.99</msg>
+<var>${result}</var>
+<status status="PASS" start="2024-07-18T19:57:36.752217" elapsed="0.000000"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-18T19:57:36.752217" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result}</arg>
+<arg>-250.99</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-18T19:57:36.752217" elapsed="0.000000"/>
+</kw>
+<tag>Negative</tag>
+<status status="PASS" start="2024-07-18T19:57:36.751216" elapsed="0.002001"/>
+</test>
+<test id="s1-t5" name="Deposit Negative Duration" line="25">
+<kw name="Test Deposit Negative Duration" owner="test_deposit">
+<msg time="2024-07-18T19:57:36.754216" level="INFO">${result} = 62.25</msg>
+<var>${result}</var>
+<status status="PASS" start="2024-07-18T19:57:36.753217" elapsed="0.000999"/>
+</kw>
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2024-07-18T19:57:36.754216" level="INFO">Argument types are:
+&lt;class 'float'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result}</arg>
+<arg>62.25</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2024-07-18T19:57:36.754216" elapsed="0.000000"/>
+</kw>
+<tag>Negative</tag>
+<status status="PASS" start="2024-07-18T19:57:36.753217" elapsed="0.000999"/>
+</test>
+<status status="PASS" start="2024-07-18T19:57:36.722547" elapsed="0.032669"/>
+</suite>
+<statistics>
+<total>
+<stat pass="5" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="4" fail="0" skip="0">Negative</stat>
+<stat pass="1" fail="0" skip="0">Positive</stat>
+</tag>
+<suite>
+<stat pass="5" fail="0" skip="0" id="s1" name="Test2">Test2</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
