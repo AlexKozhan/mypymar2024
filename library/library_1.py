@@ -32,7 +32,8 @@ class Book:
         Reserve the book for a specific user.
 
         Args:
-            user (User): The user who wants to reserve the book.
+            user (User): The user who wants to
+            reserve the book.
 
         Returns:
             str: A message indicating the success or
@@ -41,11 +42,11 @@ class Book:
         if self.is_reserved:
             return (f"Book '{self.title}' is already "
                     f"reserved by user {self.current_user.name}.")
-        else:
-            self.is_reserved = True
-            self.current_user = user
-            return (f"Book '{self.title}' is reserved "
-                    f"by user {user.name}.")
+
+        self.is_reserved = True
+        self.current_user = user
+        return (f"Book '{self.title}' is "
+                f"reserved by user {user.name}.")
 
     def take(self, user):
         """
@@ -53,23 +54,24 @@ class Book:
         reserved or reserved by them.
 
         Args:
-            user (User): The user who wants to take the book.
+            user (User): The user who wants to
+            take the book.
 
         Returns:
-            str: A message indicating the success or f
-            ailure of taking the book.
+            str: A message indicating the success
+            or failure of taking the book.
         """
         if self.is_reserved and self.current_user != user:
             return (f"Book '{self.title}' is already "
                     f"reserved by user {self.current_user.name}.")
-        elif self.current_user is not None:
+
+        if self.current_user is not None:
             return (f"Book '{self.title}' is already "
                     f"taken by user {self.current_user.name}.")
-        else:
-            self.current_user = user
-            self.is_reserved = False
-            return (f"Book '{self.title}' is taken "
-                    f"by user {user.name}.")
+
+        self.current_user = user
+        self.is_reserved = False
+        return f"Book '{self.title}' is taken by user {user.name}."
 
     def return_book(self, user):
         """
@@ -87,22 +89,22 @@ class Book:
         if self.current_user is None:
             return (f"Book '{self.title}' is not taken "
                     f"by anyone.")
-        elif self.current_user != user:
+
+        if self.current_user != user:
             return (f"Book '{self.title}' cannot be returned "
-                    f"by user {user.name} because "
-                    f"it is taken by {self.current_user.name}.")
-        else:
-            self.current_user = None
-            self.is_reserved = False
-            return (f"Book '{self.title}' is returned "
-                    f"by user {user.name}.")
+                    f"by user {user.name} because it is "
+                    f"taken by {self.current_user.name}.")
+
+        self.current_user = None
+        self.is_reserved = False
+        return (f"Book '{self.title}' is returned "
+                f"by user {user.name}.")
 
 
 class User:
     """
     Represents a user with a name who can interact
-    with books by reserving,
-    taking, and returning them.
+    with books by reserving, taking, and returning them.
     """
     def __init__(self, name):
         """
