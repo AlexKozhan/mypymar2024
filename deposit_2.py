@@ -43,6 +43,11 @@ class Bank:
         Accepts the deposit amount and term, returns the total
         amount to the user's account.
         """
+        if money <= 0:
+            raise ValueError("Initial money amount must be positive.")
+        if duration <= 0:
+            raise ValueError("Duration must be a positive integer.")
+
         deposit_instance = Deposit()
         final_money_result = (deposit_instance.calculate_final_money
                               (money, duration))
