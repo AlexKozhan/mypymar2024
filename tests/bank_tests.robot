@@ -1,13 +1,12 @@
 *** Settings ***
-Library     ../keywords/bank_keywords.py
-
-*** Variables ***
-${INITIAL_MONEY}    125
-${DURATION}         7
-${EXPECTED_FINAL}   328.75  # Example value, calculate based on the formula
+Library    ../keywords/bank_keywords.py
 
 *** Test Cases ***
 Deposit Money
-    ${bank}=    Create Bank
-    ${final_amount}=    Deposit Money    ${bank}    ${INITIAL_MONEY}    ${DURATION}
-    Should Be Equal    ${final_amount}    ${EXPECTED_FINAL}
+    [Documentation]    Test depositing money
+    Log To Console    Creating bank instance for deposit test
+    Create Bank
+    Log    Bank instance created
+    Log To Console    Calculating final money for deposit
+    Calculate Final Money    125    7    0.25    154.09
+    Log    Final money calculated for deposit

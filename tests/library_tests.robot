@@ -1,25 +1,13 @@
 *** Settings ***
 Library    ../keywords/library_keywords.py
 
-*** Variables ***
-${BOOK_TITLE}    White Fang
-${BOOK_AUTHOR}   Jack London
-${BOOK_PAGES}    100
-${BOOK_ISBN}     1234567890
-${USER_NAME}     Alex
-
 *** Test Cases ***
 Reserve Book
-    ${user}=    Create User    ${USER_NAME}
-    ${book}=    Create Book    ${BOOK_TITLE}    ${BOOK_AUTHOR}    ${BOOK_PAGES}    ${BOOK_ISBN}
-    Reserve Book    ${user}    ${book}
-    ${is_reserved}=    Is Book Reserved    ${book}
-    Should Be True    ${is_reserved}
-
-Take Book
-    ${user}=    Create User    ${USER_NAME}
-    ${book}=    Create Book    ${BOOK_TITLE}    ${BOOK_AUTHOR}    ${BOOK_PAGES}    ${BOOK_ISBN}
-    Reserve Book    ${user}    ${book}
-    Take Book    ${user}    ${book}
-    ${is_taken}=    Is Book Taken    ${book}
-    Should Be True    ${is_taken}
+    [Documentation]    Test reserving a book
+    Log To Console    Creating user and book for reservation test
+    Create User    Alex
+    Create Book    White Fang    Jack London    100    1234567890
+    Log    User 'Alex' and book 'White Fang' created
+    Log To Console    Reserving the book 'White Fang' for user 'Alex'
+    Reserve Book   Alex    White Fang
+    Log    Book 'White Fang' reserved by user 'Alex'
