@@ -3,3 +3,5 @@ pycodestyle
 mypy
 ruff
 pylint
+selenium
+pytest
