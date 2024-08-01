@@ -25,7 +25,7 @@ def driver():
         "credentials_enable_service": False,
         "profile.password_manager_enabled": False
     })
-    driver = webdriver.Chrome(service=Service
-    (ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
+                              options=options)
     yield driver
     driver.quit()
