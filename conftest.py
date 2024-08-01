@@ -10,8 +10,10 @@ def driver():
     """
     Pytest fixture to set up the Selenium WebDriver with Chrome options.
 
-    This fixture initializes a Chrome WebDriver instance with incognito mode and disabled
-    password manager options. The WebDriver instance is provided to each test case, and
+    This fixture initializes a Chrome WebDriver
+    instance with incognito mode and disabled
+    password manager options. The WebDriver instance
+    is provided to each test case, and
     it automatically quits after the test execution to clean up resources.
 
     Returns:
@@ -23,6 +25,7 @@ def driver():
         "credentials_enable_service": False,
         "profile.password_manager_enabled": False
     })
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver = webdriver.Chrome(service=Service
+    (ChromeDriverManager().install()), options=options)
     yield driver
     driver.quit()
