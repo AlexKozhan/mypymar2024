@@ -1,5 +1,0 @@
-flake8
-pycodestyle
-mypy
-ruff
-pylint

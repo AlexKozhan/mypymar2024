@@ -1,2 +1,4 @@
 [MESSAGES CONTROL]
-disable=too-few-public-methods
+disable = invalid-name, too-few-public-methods, duplicate-code, import-error,
+ attribute-defined-outside-init, redefined-outer-name, useless-parent-delegation,
+  too-many-arguments
