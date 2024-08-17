@@ -24,7 +24,8 @@ def test_create_user():
 
 def test_get_user():
     global user_id
-    assert user_id is not None, "user_id должен быть установлен после создания пользователя"
+    assert user_id is not None, ("user_id должен быть "
+                                 "установлен после создания пользователя")
     url = f"{BASE_URL}/getUser/{user_id}"
 
     response = requests.get(url, headers=HEADERS)
@@ -37,7 +38,8 @@ def test_get_user():
 
 def test_update_user():
     global user_id
-    assert user_id is not None, "user_id должен быть установлен после создания пользователя"
+    assert user_id is not None, ("user_id должен быть "
+                                 "установлен после создания пользователя")
     url = f"{BASE_URL}/updateUser/{user_id}"
     payload = user_payload()
     payload["name"] = "John Smith"
@@ -55,7 +57,9 @@ def test_update_user():
 
 def test_delete_user():
     global user_id
-    assert user_id is not None, "user_id должен быть установлен после создания пользователя"
+    assert user_id is not None, ("user_id должен "
+                                 "быть установлен "
+                                 "после создания пользователя")
     url = f"{BASE_URL}/deleteUser/{user_id}"
 
     response = requests.delete(url, headers=HEADERS)
