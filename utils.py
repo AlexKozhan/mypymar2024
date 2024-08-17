@@ -13,10 +13,12 @@ def log_response(response):
 
 def handle_response(response):
     if response.status_code >= 500:
-        raise Exception(f"Server error: {response.status_code} - {response.text}")
+        raise Exception(f"Server error: "
+                        f"{response.status_code} - {response.text}")
     elif response.status_code == 404:
         raise Exception(f"Resource not found: {response.text}")
     elif response.status_code == 401:
         raise Exception(f"Unauthorized: {response.text}")
     elif response.status_code != 200:
-        raise Exception(f"Unexpected status code: {response.status_code} - {response.text}")
+        raise Exception(f"Unexpected status code: "
+                        f"{response.status_code} - {response.text}")
